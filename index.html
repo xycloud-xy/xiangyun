@@ -641,22 +641,22 @@
     <!-- Outer Wrapper -->
     <div class="relative w-full max-w-md max-h-[95vh] overflow-y-auto rounded-2xl p-1.5 bg-gradient-to-b from-gold-400/70 via-gold-600/40 to-gold-400/70 shadow-2xl transition-all">
       
-      <!-- Gold-Flecked Xuan Paper Surface (with proper padding to prevent border clipping) -->
-      <div id="sajinPaperSurface" class="relative rounded-xl p-5 sm:p-7 text-[#221D17] transition-all"
+      <!-- Gold-Flecked Xuan Paper Surface (加大安全内边距 p-6 sm:p-8，防止截图吃掉边框) -->
+      <div id="sajinPaperSurface" class="relative rounded-xl p-6 sm:p-8 text-[#221D17] transition-all"
            style="background-color: #F4EFE6; background-image: radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.35) 1.5px, transparent 2px), radial-gradient(circle at 76% 14%, rgba(197, 160, 89, 0.45) 0%, rgba(197, 160, 89, 0.45) 2px, transparent 2.5px), radial-gradient(circle at 42% 68%, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.4) 1.5px, transparent 2px), radial-gradient(circle at 85% 78%, rgba(180, 138, 62, 0.38) 0%, rgba(180, 138, 62, 0.38) 2.2px, transparent 3px); background-size: 140px 140px;">
         
         <!-- Double-Line Classical Oriental Frame with Inner Spacing -->
-        <div class="border-2 border-[#8C6D3F]/60 p-1.5 rounded-lg">
-          <div class="border border-[#8C6D3F]/35 p-4 sm:p-5 rounded space-y-4 relative">
+        <div class="border-2 border-[#8C6D3F]/60 p-2 rounded-lg">
+          <div class="border border-[#8C6D3F]/35 p-4 sm:p-5 rounded space-y-4 relative bg-transparent">
             
             <!-- Close Button (Ignored during html2canvas) -->
-            <button data-html2canvas-ignore="true" onclick="closeWaiterCardModal()" class="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#221D17]/10 hover:bg-[#221D17]/20 text-[#221D17] flex items-center justify-center text-xs transition" title="关闭">
+            <button data-html2canvas-ignore="true" onclick="closeWaiterCardModal()" class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#EAE2D3] border border-[#8C6D3F]/40 hover:bg-[#8C6D3F]/20 text-[#221D17] flex items-center justify-center text-sm transition shadow" title="关闭">
               ✕
             </button>
 
             <!-- Scroll Header -->
             <div class="text-center space-y-1 border-b-2 border-[#8C6D3F]/30 pb-3">
-              <div class="inline-block seal-stamp px-2.5 py-0.5 text-[10px] rounded-sm mb-0.5 leading-normal">雅集珍席</div>
+              <div class="inline-block seal-stamp px-2.5 py-0.5 text-[10px] rounded-sm mb-1 leading-normal">雅集珍席</div>
               <h3 id="waiterCardTitle" class="text-xl sm:text-2xl font-bold tracking-[0.18em] text-[#1A1612] leading-relaxed py-1">云起·东方雅集席单</h3>
               <p class="text-[9px] tracking-[0.2em] text-[#705528] uppercase font-en leading-normal">YUNQI PRIVATE TEA & BANQUET SCROLL</p>
             </div>
@@ -665,21 +665,21 @@
             <div class="bg-[#EAE2D3]/85 border border-[#8C6D3F]/35 rounded-lg p-3 grid grid-cols-3 gap-2 text-left">
               <div class="min-w-0">
                 <div class="text-[9px] text-[#705528] tracking-widest leading-normal" id="cardRoomLabel">【 私享茶寮 】</div>
-                <div id="cardRoomValue" class="text-xs font-bold text-[#1A1612] mt-0.5 leading-normal break-words">临水听竹轩</div>
+                <div id="cardRoomValue" class="text-xs font-bold text-[#1A1612] mt-1 leading-normal break-words">临水听竹轩</div>
               </div>
               <div class="min-w-0">
                 <div class="text-[9px] text-[#705528] tracking-widest leading-normal" id="cardTimeLabel">【 雅集时辰 】</div>
-                <div id="cardTimeValue" class="text-xs font-bold text-[#1A1612] mt-0.5 leading-normal break-words">晚宴 · 戌时</div>
+                <div id="cardTimeValue" class="text-xs font-bold text-[#1A1612] mt-1 leading-normal break-words">晚宴 · 戌时</div>
               </div>
               <div class="min-w-0">
                 <div class="text-[9px] text-[#705528] tracking-widest leading-normal" id="cardGuestsLabel">【 入席宾客 】</div>
-                <div id="cardGuestsValue" class="text-xs font-bold text-[#9B2C20] mt-0.5 leading-normal tabular-nums">4 位尊客</div>
+                <div id="cardGuestsValue" class="text-xs font-bold text-[#9B2C20] mt-1 leading-normal tabular-nums">4 位</div>
               </div>
             </div>
 
             <!-- Itemized List -->
             <div class="space-y-1">
-              <div class="flex items-center justify-between text-[10px] text-[#705528] tracking-widest border-b border-[#8C6D3F]/25 pb-1 leading-normal">
+              <div class="flex items-center justify-between text-[10px] text-[#705528] tracking-widest border-b border-[#8C6D3F]/25 pb-2 leading-normal">
                 <span id="cardColDish">入席珍馐与岩茶</span>
                 <span id="cardColQty">份数 / 礼金</span>
               </div>
@@ -687,15 +687,15 @@
             </div>
 
             <!-- Remarks if any -->
-            <div id="cardRemarksBox" class="hidden bg-[#9B2C20]/10 border border-[#9B2C20]/30 rounded-lg p-2.5 text-xs text-[#782016] leading-relaxed">
+            <div id="cardRemarksBox" class="hidden bg-[#9B2C20]/10 border border-[#9B2C20]/30 rounded-lg p-2.5 text-xs text-[#782016] leading-relaxed mt-2">
               <span class="font-semibold">席间雅嘱：</span>
               <span id="cardRemarksText"></span>
             </div>
 
             <!-- Footer Stamp -->
-            <div class="pt-3 border-t-2 border-[#8C6D3F]/30 flex items-center justify-between">
+            <div class="pt-3 border-t-2 border-[#8C6D3F]/30 flex items-center justify-between mt-2">
               <div class="space-y-1">
-                <div id="waiterCardHint" class="text-[10px] text-[#5C4D3C] leading-normal py-0.5">出示给侍茶师或保存为图片</div>
+                <div data-html2canvas-ignore="true" id="waiterCardHint" class="text-[10px] text-[#5C4D3C] leading-normal py-0.5">出示给侍茶师或保存为图片</div>
                 <div id="cardDateStamp" class="text-[9px] text-[#8C6D3F] font-en tracking-widest leading-normal"></div>
               </div>
               <div class="text-right shrink-0">
@@ -704,36 +704,8 @@
               </div>
             </div>
 
-            <!-- Itemized List -->
-            <div class="space-y-1">
-              <div class="flex items-center justify-between text-[10px] text-[#705528] tracking-widest border-b border-[#8C6D3F]/25 pb-1">
-                <span id="cardColDish">入席珍馐与岩茶</span>
-                <span id="cardColQty">份数 / 礼金</span>
-              </div>
-              <div id="waiterCardItems" class="divide-y divide-[#8C6D3F]/20"></div>
-            </div>
-
-            <!-- Remarks if any -->
-            <div id="cardRemarksBox" class="hidden bg-[#9B2C20]/10 border border-[#9B2C20]/30 rounded-lg p-2.5 text-xs text-[#782016]">
-              <span class="font-semibold">席间雅嘱：</span>
-              <span id="cardRemarksText"></span>
-            </div>
-
-            <!-- Footer Stamp -->
-            <div class="pt-2 border-t-2 border-[#8C6D3F]/30 flex items-end justify-between">
-              <div class="space-y-0.5">
-                <div id="waiterCardHint" class="text-[10px] text-[#5C4D3C]">出示给侍茶师或保存为图片</div>
-                <div id="cardDateStamp" class="text-[9px] text-[#8C6D3F] font-en tracking-widest"></div>
-              </div>
-              <div class="text-right shrink-0">
-                <div class="text-[10px] text-[#705528]" id="waiterTotalLabel">预估合计</div>
-                <div id="waiterCardTotal" class="text-xl font-bold text-[#9B2C20] tabular-nums">¥0</div>
-              </div>
-            </div>
-
           </div>
         </div>
-
       </div>
 
       <!-- Action Buttons inside Modal (Ignored by html2canvas) -->
@@ -1786,15 +1758,29 @@
           return;
         }
 
+        // 【核心修复】：截图前，临时取消外层模态框的最大高度和滚动条，让内容完全展开
+        const modalWrapper = surfaceEl.parentElement;
+        const originalMaxH = modalWrapper.style.maxHeight;
+        const originalOverflow = modalWrapper.style.overflow;
+        modalWrapper.style.maxHeight = 'none';
+        modalWrapper.style.overflow = 'visible';
+
+        // 等待浏览器完成重排版 (Reflow)
+        await new Promise(resolve => setTimeout(resolve, 150));
+
         const canvas = await html2canvas(surfaceEl, {
-          scale: 2.5,
+          scale: 3, // 使用3倍视网膜级高清渲染
           useCORS: true,
-          backgroundColor: '#F4EFE6',
+          backgroundColor: '#F4EFE6', // 指定明确的背景色，防止漏底
           logging: false,
           windowWidth: surfaceEl.scrollWidth + 40
         });
 
-        const dataUrl = canvas.toDataURL('image/png');
+        // 截图完成后，恢复原有的滚动条和最大高度样式
+        modalWrapper.style.maxHeight = originalMaxH;
+        modalWrapper.style.overflow = originalOverflow;
+
+        const dataUrl = canvas.toDataURL('image/png', 1.0);
         const link = document.createElement('a');
         const dateStr = new Date().toISOString().slice(0, 10);
         link.download = `云起雅集席单_${state.tableRoom}_${dateStr}.png`;
