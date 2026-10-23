@@ -204,7 +204,7 @@
           class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-ink-800/90 border border-gold-500/35 hover:border-gold-400 text-xs font-medium tracking-wider text-parchment-200 transition-all active:scale-95"
           title="开启免代码实时改菜单模式">
           <span id="curatorStatusDot" class="w-1.5 h-1.5 rounded-full bg-parchment-400 transition-colors"></span>
-          <span id="curatorModeBtnText">主理人模式</span>
+          <span id="curatorModeBtnText">掌席模式</span>
         </button>
 
         <!-- Bilingual Switch (中 / EN) -->
@@ -222,8 +222,8 @@
   <div id="curatorBanner" class="hidden sticky top-16 z-30 bg-gradient-to-r from-cinnabar-700/95 via-ink-900/95 to-ink-900/95 backdrop-blur-md border-b border-gold-400/40 shadow-lg">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
       <div class="flex items-center gap-2 text-xs text-parchment-100">
-        <span class="px-2 py-0.5 rounded bg-gold-500 text-ink-950 font-bold text-[10px] tracking-widest">EDIT MODE</span>
-        <span id="curatorBannerDesc">主理人编辑模式已开：点击任意菜品卡片即可修改图文与价格</span>
+        <span class="px-2 py-0.5 rounded bg-gold-500 text-ink-950 font-bold text-[10px] tracking-widest">掌席模式</span>
+        <span id="curatorBannerDesc">掌席模式已开：点击任意菜品卡片即可修改图文与价格</span>
       </div>
       <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
         <button onclick="openCuratorEditor(null)"
@@ -740,7 +740,7 @@
       
       <div class="flex items-center justify-between border-b border-gold-500/20 pb-3">
         <div class="flex items-center gap-2">
-          <span class="seal-stamp px-2 py-0.5 text-[10px] rounded-sm">主理人</span>
+          <span class="seal-stamp px-2 py-0.5 text-[10px] rounded-sm">掌席</span>
           <div>
             <h3 id="curatorModalTitle" class="text-sm sm:text-base font-semibold text-gold-300">编辑单品（免代码实时保存）</h3>
             <p class="text-[10px] text-parchment-400">修改后自动保存在浏览器中，支持上传实拍图</p>
@@ -863,6 +863,22 @@
     </div>
   </div>
 
+  <!-- ==========================================
+       MODAL 6: PASSWORD VERIFICATION MODAL
+       ========================================== -->
+  <div id="passwordModal" onclick="if(event.target === this) closePasswordModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-sm bg-ink-900 border border-gold-500/40 rounded-2xl p-5 text-center space-y-4 shadow-2xl animate-card-enter">
+      <div class="inline-block seal-stamp px-2 py-0.5 text-[10px] rounded-sm">掌席验证</div>
+      <h4 class="text-sm font-medium text-parchment-100">请输入掌席密码</h4>
+      <input type="password" id="curatorPasswordInput" placeholder="输入密码开启权限..." 
+        class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-center text-parchment-100 placeholder-parchment-400/50 focus:outline-none focus:border-gold-400" />
+      <div class="flex items-center gap-2.5 pt-1">
+        <button onclick="closePasswordModal()" class="flex-1 py-2 rounded-xl bg-ink-800 text-parchment-200 text-xs transition active:scale-95">取消</button>
+        <button onclick="verifyPassword()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-ink-950 text-xs font-semibold shadow-md transition active:scale-95">确认开启</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2">
     <div class="px-3.5 py-1.5 rounded-full bg-ink-900/95 border border-gold-500/60 text-gold-300 text-xs tracking-wider shadow-xl flex items-center gap-2">
@@ -898,8 +914,7 @@
         oneLinerEn: 'Three-year aged ginger layered beneath duck, slow-braised in sesame oil and rice wine.',
         storyZh: '源自泉州闽南古早味食补佳肴。精选散养正番鸭与漳州三年陈老姜，老姜拍裂铺满砂煲底部，以古法胡麻油慢火煸香，全程不加一滴水，仅凭米酒慢焗收汁。',
         storyEn: 'An iconic culinary heritage of Southern Fujian.',
-        <img src="images/1.jpg">
-
+        image: '1.jpg',
         metrics: [
           { labelZh: '姜香馥郁度', value: 95 },
           { labelZh: '酱汁醇厚度', value: 92 },
@@ -927,7 +942,7 @@
         oneLinerEn: 'Fresh marine sandworms simmered to natural collagen jelly.',
         storyZh: '泉州安海传承数百年的海洋风味奇珍。每日清晨采捕自安海滩涂的鲜活土笋，经手工反复揉洗熬煮，静置冷却凝结如白玉琥珀。',
         storyEn: 'A centuries-old coastal delicacy from Anhai, Quanzhou.',
-        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80',
+        image: '2.jpg',
         metrics: [
           { labelZh: '海洋鲜甜度', value: 96 },
           { labelZh: '爽脆Q弹度', value: 94 },
@@ -955,7 +970,7 @@
         oneLinerEn: 'Grain-fed prime beef short ribs slow-braised and seared.',
         storyZh: '融合传统中式小火慢卤与现代西式炙烤工艺的匠心之作。严选雪花牛肉，经新会陈皮与老卤文火慢炖后猛火脆煎。',
         storyEn: 'Bridging Chinese braising and modern roasting.',
-        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80',
+        image: '3.jpg',
         metrics: [
           { labelZh: '油脂丰腴度', value: 94 },
           { labelZh: '表皮酥脆度', value: 92 },
@@ -983,7 +998,7 @@
         oneLinerEn: 'Crafted from center knuckle of Jinhua ham, double-boiled 8 hours.',
         storyZh: '甄选金华三年陈火腿中骨髓最饱满的“火瞳”部位，配以散养老母鸡与瑶柱，在定制紫砂盅内隔水慢炖足足八小时。',
         storyEn: 'An homage to classical banquet soup mastery.',
-        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1000&q=80',
+        image: '4.jpg',
         metrics: [
           { labelZh: '金汤醇厚度', value: 98 },
           { labelZh: '胶质粘唇感', value: 95 },
@@ -992,59 +1007,59 @@
         ]
       },
       {
-        id: 'dish-qingshu-bamboo',
-        category: 'qingshu',
-        nameZh: '鸡汤津白煨武夷冬笋',
-        nameEn: 'Wuyi Winter Bamboo Shoots',
-        price: 98,
-        unitZh: '例',
-        unitEn: 'portion',
-        badgeZh: '山野时鲜',
-        badgeEn: 'Greens',
-        originZh: '武夷山场冬笋 · 清鸡汤文火慢煨',
-        originEn: 'Wuyi Mountain Bamboo',
-        pairingZh: '宜佐：武夷奇种 / 清香铁观音',
-        pairingEn: 'Pairs with: Oolong',
-        tagsZh: ['山林清甜', '脆嫩无渣', '高汤入魂'],
-        tagsEn: ['Crisp', 'Sweet', 'Broth'],
-        oneLinerZh: '严选武夷山破土冬笋与霜降津白芯，以清澈老母鸡高汤文火煨透，清甜入魂。',
-        oneLinerEn: 'Fresh Wuyi winter bamboo shoots and cabbage hearts.',
-        storyZh: '取自武夷山深处未出土的黄泥冬笋，笋肉洁白如玉、脆嫩无渣。配以霜降后的津白芯，用清澈老母鸡汤文火慢煨。',
-        storyEn: 'Harvested from beneath the yellow clay of Wuyi Mountain.',
-        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80',
+        id: 'dish-lobster-cheese',
+        category: 'huoxiang',
+        nameZh: '芝士金汤焗小青龙',
+        nameEn: 'Baked Baby Lobster with Cheese',
+        price: 398,
+        unitZh: '只',
+        unitEn: 'piece',
+        badgeZh: '中西合璧',
+        badgeEn: 'Fusion',
+        originZh: '深海鲜活小青龙 · 醇厚芝士金汤',
+        originEn: 'Deep Sea Lobster',
+        pairingZh: '宜佐：清香铁观音 / 白毫银针',
+        pairingEn: 'Pairs with: White Tea',
+        tagsZh: ['肉质Q弹', '芝士浓香', '金汤挂汁'],
+        tagsEn: ['Cheesy', 'Tender', 'Rich Broth'],
+        oneLinerZh: '鲜活小青龙开边，佐以醇厚芝士与南瓜浓金汤高温焗烤，鲜甜奶香交织。',
+        oneLinerEn: 'Fresh baby lobster baked with rich cheese and golden pumpkin broth.',
+        storyZh: '甄选鲜活小青龙，肉质紧实Q弹。创新融合西式芝士焗烤工艺与中式高汤吊出的金汤底，海味鲜甜与浓郁奶香完美交融，回味无穷。',
+        storyEn: 'A perfect fusion of Western cheese baking and traditional Chinese golden broth.',
+        image: '6.jpg',
         metrics: [
-          { labelZh: '山野清甜度', value: 96 },
-          { labelZh: '笋肉脆嫩度', value: 94 },
-          { labelZh: '鸡汤鲜醇度', value: 90 },
-          { labelZh: '清新解腻度', value: 95 }
+          { labelZh: '芝士浓郁度', value: 95 },
+          { labelZh: '虾肉Q弹度', value: 96 },
+          { labelZh: '金汤鲜甜度', value: 92 },
+          { labelZh: '创新融合度', value: 94 }
         ]
       },
       {
-        id: 'tea-rougui',
-        category: 'ganyun',
-        nameZh: '马头岩肉桂 · 佐古法茶点',
-        nameEn: 'Matouyan Rougui Rock Tea',
-        price: 168,
-        unitZh: '席',
-        unitEn: 'set',
-        badgeZh: '甘韵茗珍',
-        badgeEn: 'Tea & Sweets',
-        originZh: '武夷山马头岩 · 佐手工绿豆糕与柑饼',
-        originEn: 'Matouyan Cliff Tea',
-        pairingZh: '建水紫陶壶 · 100°C沸水悬壶高冲',
-        pairingEn: 'Jianshui Clay Pot',
-        tagsZh: ['岩骨花香', '手工茶果', '甘润收官'],
-        tagsEn: ['Charcoal Tea', 'Pastry', 'Sweet Finish'],
-        oneLinerZh: '武夷正岩马头岩肉桂足火慢焙，奉席配以闽南古法冰心绿豆糕与九制老柑饼。',
-        oneLinerEn: 'Charcoal-roasted Matouyan Rougui rock tea with pastries.',
-        storyZh: '采自武夷山正岩核心产区马头岩，经传统果木炭火慢炖，开汤桂皮辛香显露。随茶奉上手工绿豆糕与老柑饼。',
-        storyEn: 'Grown in weathered gravel soil on Matouyan Cliff.',
-        image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80',
+        id: 'dish-crab-duck-soup',
+        category: 'dingdun',
+        nameZh: '30年老熟地糕蟹老鸭汤',
+        nameEn: 'Aged Rehmannia Mud Crab & Duck Soup',
+        price: 688,
+        unitZh: '煲',
+        unitEn: 'pot',
+        badgeZh: '闽南药膳',
+        badgeEn: 'Herbal Soup',
+        originZh: '三十年老熟地 · 爆膏红鲟与正番鸭',
+        originEn: '30-Year Aged Rehmannia',
+        pairingZh: '宜佐：陈年老白茶',
+        pairingEn: 'Pairs with: Aged White Tea',
+        tagsZh: ['传家药膳', '红膏满溢', '滋阴降火'],
+        tagsEn: ['Herbal', 'Rich Crab Roe', 'Nourishing'],
+        oneLinerZh: '三十年九蒸九晒老熟地，与爆膏红鲟、老母鸭同煲，汤黑如墨，甘甜入魂。',
+        oneLinerEn: '30-year aged Rehmannia simmered with mud crab and old duck.',
+        storyZh: '取闽南民间“药膳同源”之精髓，三十年陈年老熟地历经九蒸九晒，褪去药苦只留甘醇。搭配鲜活带膏红鲟（糕蟹）与散养正番老鸭文火慢熬。汤色深邃如墨，入口却极其清甜鲜美。',
+        storyEn: 'A traditional Minnan herbal soup deeply nourishing and intensely flavorful.',
+        image: '5.jpg',
         metrics: [
-          { labelZh: '岩韵辛锐度', value: 95 },
-          { labelZh: '茶点清甜度', value: 91 },
-          { labelZh: '桂皮馥郁度', value: 94 },
-          { labelZh: '喉韵回甘度', value: 96 }
+          { labelZh: '药膳甘甜度', value: 98 },
+          { labelZh: '蟹膏丰腴度', value: 95 },
+          { labelZh: '鸭肉酥烂度', value: 92 },
+          { labelZh: '滋补养生度', value: 99 }
         ]
       }
     ];
@@ -1116,11 +1131,7 @@
       tableRoom: '临水听竹轩',
       timeSlot: '晚宴 · 戌时 (18:30-21:30)',
       banquetNote: '',
-      wishlist: [
-        { itemId: 'dish-jiangmuya', qty: 1, prefId: 'standard', note: '' },
-        { itemId: 'dish-huotongchi', qty: 4, prefId: 'hot', note: '按位上席' },
-        { itemId: 'tea-rougui', qty: 1, prefId: 'tea-pair', note: '紫陶壶冲泡' }
-      ]
+      wishlist: []
     };
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1141,8 +1152,8 @@
       document.getElementById('brandTitle').textContent = isZh ? '云起·闽宴茶事' : 'YUNQI · BANQUET';
       document.getElementById('langIndicator').textContent = isZh ? '中 / EN' : 'EN / 中';
       document.getElementById('curatorModeBtnText').textContent = isZh
-        ? (state.curatorMode ? '退出编辑' : '主理人模式')
-        : (state.curatorMode ? 'Exit' : 'Curator');
+        ? (state.curatorMode ? '退出掌席' : '掌席模式')
+        : (state.curatorMode ? 'Exit' : 'Master Mode');
 
       document.getElementById('mobileColText').textContent = isZh
         ? (state.mobileCols === 1 ? '双列' : '单列')
@@ -1167,7 +1178,7 @@
         ? `${activeCatObj.nameZh} · 东方雅集精选`
         : `${activeCatObj.nameEn} · Curated Selection`;
       document.getElementById('currentCategorySub').textContent = state.curatorMode
-        ? (isZh ? '【主理人模式已开】点击任意卡片修改图文与价格' : 'Curator Mode ON')
+        ? (isZh ? '【掌席模式已开】点击任意卡片修改图文与价格' : 'Master Mode ON')
         : (isZh ? '点击任意菜品卡片，赏阅大图、风味指标与风物故事' : 'Tap any card for metrics and backstory');
 
       document.getElementById('wishlistBarTitle').textContent = isZh ? '席位雅集定制单' : 'Banquet Scroll';
@@ -1861,7 +1872,42 @@
     }
 
     function toggleCuratorMode() {
-      state.curatorMode = !state.curatorMode;
+      if (state.curatorMode) {
+        executeToggleCuratorMode(false);
+      } else {
+        openPasswordModal();
+      }
+    }
+
+    function openPasswordModal() {
+      const modal = document.getElementById('passwordModal');
+      const input = document.getElementById('curatorPasswordInput');
+      input.value = '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function closePasswordModal() {
+      const modal = document.getElementById('passwordModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function verifyPassword() {
+      const input = document.getElementById('curatorPasswordInput');
+      if (input.value === '123456') {
+        closePasswordModal();
+        executeToggleCuratorMode(true);
+      } else {
+        showToast('密码错误，请重新输入');
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    function executeToggleCuratorMode(turnOn) {
+      state.curatorMode = turnOn;
       const banner = document.getElementById('curatorBanner');
       const btn = document.getElementById('curatorModeBtn');
       const dot = document.getElementById('curatorStatusDot');
@@ -1871,13 +1917,13 @@
         btn.classList.add('border-gold-400', 'bg-gold-500/20', 'text-gold-300');
         dot.classList.remove('bg-parchment-400');
         dot.classList.add('bg-cinnabar-500', 'animate-ping');
-        showToast('主理人模式已开：点击任意卡片修改图文');
+        showToast('掌席模式已开：点击任意卡片修改图文');
       } else {
         banner.classList.add('hidden');
         btn.classList.remove('border-gold-400', 'bg-gold-500/20', 'text-gold-300');
         dot.classList.add('bg-parchment-400');
         dot.classList.remove('bg-cinnabar-500', 'animate-ping');
-        showToast('已退出主理人模式');
+        showToast('已退出掌席模式');
       }
       renderAll();
     }
