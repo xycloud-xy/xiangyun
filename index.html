@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>云起·闽宴茶事 | 新中式东方美学互动电子菜单</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Serif SC, Cormorant Garamond, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- html2canvas for saving the Banquet Scroll Card as an image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ink: {
+              950: '#0C0B09',
+              900: '#11100E',
+              800: '#1A1815',
+              700: '#26231F',
+              600: '#38332D'
+            },
+            gold: {
+              200: '#EFE2C6',
+              300: '#DFC590',
+              400: '#D4AF37',
+              500: '#C8A265',
+              600: '#9E7B42',
+              700: '#705528'
+            },
+            cinnabar: {
+              500: '#B5382A',
+              600: '#9B2C20',
+              700: '#782016'
+            },
+            parchment: {
+              100: '#F7F4EE',
+              200: '#EAE4DC',
+              300: '#C6BEB3',
+              400: '#968D81'
+            }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', '"Cormorant Garamond"', 'serif'],
+            en: ['"Cormorant Garamond"', '"Noto Serif SC"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-ink: #11100E;
+      --gold: #C8A265;
+      --cinnabar: #9B2C20;
+    }
+
+    body {
+      background-color: #11100E;
+      color: #EAE4DC;
+      font-family: 'Noto Serif SC', serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Subtle Dark Rice-Paper & Micro-Grain Texture */
+    .bg-paper-texture {
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(200, 162, 101, 0.09) 0%, transparent 65%),
+        radial-gradient(circle at 85% 35%, rgba(155, 44, 32, 0.05) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* Traditional Seal Stamp Style (朱砂印章) */
+    .seal-stamp {
+      background-color: #9B2C20;
+      color: #F7F4EE;
+      border: 1px solid rgba(247, 244, 238, 0.35);
+      box-shadow: inset 0 0 0 2px #9B2C20, 0 4px 12px rgba(155, 44, 32, 0.45);
+      letter-spacing: 0.12em;
+    }
+
+    /* Card Aesthetics & Hover Glow */
+    .oriental-card {
+      background: linear-gradient(180deg, rgba(26, 24, 21, 0.78) 0%, rgba(17, 16, 14, 0.96) 100%);
+      border: 1px solid rgba(200, 162, 101, 0.18);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .oriental-card:hover {
+      border-color: rgba(200, 162, 101, 0.55);
+      box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.9), 0 0 24px -4px rgba(200, 162, 101, 0.15);
+      transform: translateY(-3px);
+    }
+
+    /* Dark Vignette on Food Photography */
+    .image-vignette::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #12110F 2%, rgba(18, 17, 15, 0.25) 48%, rgba(0, 0, 0, 0.25) 100%);
+      pointer-events: none;
+    }
+
+    /* Smooth Grid Filter Fade & Slide Animation */
+    @keyframes cardFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .animate-card-enter {
+      animation: cardFadeUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Smooth Sliding Category Indicator */
+    .cat-btn-active {
+      background: linear-gradient(135deg, #D4AF37 0%, #C8A265 100%);
+      color: #0C0B09;
+      box-shadow: 0 4px 16px rgba(200, 162, 101, 0.35);
+    }
+
+    /* Hide Scrollbars for Mobile Horizontal Category Bar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Tabular numerals for prices and metrics */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Custom Scrollbar for Desktop */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #11100E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #38332D;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C8A265;
+    }
+  </style>
+</head>
+
+<body class="bg-paper-texture min-h-screen flex flex-col selection:bg-gold-500/30 selection:text-gold-300">
+
+  <!-- Ambient Floating Gold Mist Canvas -->
+  <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-55"></canvas>
+
+  <!-- ==========================================
+       TOP STICKY HEADER
+       ========================================== -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-ink-950/85 border-b border-gold-500/15 transition-all">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+      
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-2.5">
+        <div class="seal-stamp px-2 py-1 rounded-sm text-xs font-semibold tracking-widest select-none">
+          雅集
+        </div>
+        <div>
+          <span class="text-sm sm:text-lg font-semibold tracking-wider text-parchment-100 block leading-none" id="brandTitle">云起·闽宴茶事</span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.18em] text-gold-500 uppercase font-en block mt-0.5" id="brandSub">YUNQI ORIENTAL CUISINE & TEA SALON</span>
+        </div>
+      </div>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        
+        <!-- Mobile 1-Col / 2-Col Switcher -->
+        <button id="mobileColToggleBtn" onclick="toggleMobileGridCols()"
+          class="sm:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-ink-800/90 border border-gold-500/25 text-xs text-parchment-200 active:scale-95 transition"
+          title="切换单列大图或双列紧凑视图">
+          <svg id="colToggleIcon" class="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span id="mobileColText" class="text-[11px] text-gold-300">双列</span>
+        </button>
+
+        <!-- Curator Live Edit Mode Toggle -->
+        <button id="curatorModeBtn" onclick="toggleCuratorMode()"
+          class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-ink-800/90 border border-gold-500/35 hover:border-gold-400 text-xs font-medium tracking-wider text-parchment-200 transition-all active:scale-95"
+          title="开启免代码实时改菜单模式">
+          <span id="curatorStatusDot" class="w-1.5 h-1.5 rounded-full bg-parchment-400 transition-colors"></span>
+          <span id="curatorModeBtnText">主理人模式</span>
+        </button>
+
+        <!-- Bilingual Switch (中 / EN) -->
+        <button onclick="toggleLanguage()" 
+          class="px-3 py-1.5 rounded-full bg-ink-800/90 border border-gold-500/35 hover:border-gold-400 text-xs font-medium tracking-wider text-gold-400 transition-all active:scale-95">
+          <span id="langIndicator">中 / EN</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       CURATOR MODE STICKY CONTROL BANNER
+       ========================================== -->
+  <div id="curatorBanner" class="hidden sticky top-16 z-30 bg-gradient-to-r from-cinnabar-700/95 via-ink-900/95 to-ink-900/95 backdrop-blur-md border-b border-gold-400/40 shadow-lg">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+      <div class="flex items-center gap-2 text-xs text-parchment-100">
+        <span class="px-2 py-0.5 rounded bg-gold-500 text-ink-950 font-bold text-[10px] tracking-widest">EDIT MODE</span>
+        <span id="curatorBannerDesc">主理人编辑模式已开：点击任意菜品卡片即可修改图文与价格</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+        <button onclick="openCuratorEditor(null)"
+          class="px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-ink-950 font-semibold text-xs tracking-wider transition flex items-center gap-1 shadow">
+          <span>+</span>
+          <span id="addNewDishBtnText">新增时令新菜</span>
+        </button>
+        <button onclick="exportMenuDataBackup()"
+          class="px-3 py-1.5 rounded-lg bg-ink-800 hover:bg-ink-700 border border-gold-500/40 text-gold-300 text-xs tracking-wider transition">
+          <span id="exportDataBtnText">导出数据备份</span>
+        </button>
+        <button onclick="openResetConfirmModal()"
+          class="px-3 py-1.5 rounded-lg bg-ink-950/80 hover:bg-cinnabar-600/40 border border-cinnabar-500/40 text-parchment-300 hover:text-parchment-100 text-xs tracking-wider transition">
+          <span id="resetMenuBtnText">恢复默认</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       HERO BANNER SECTION
+       ========================================== -->
+  <section class="relative z-10 pt-4 pb-3 sm:pt-8 sm:pb-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="relative rounded-2xl overflow-hidden border border-gold-500/25 bg-ink-900/90 shadow-2xl">
+      <!-- Background Mood Imagery -->
+      <div class="absolute inset-0 opacity-35">
+        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1600&q=80" 
+             alt="Neo-Chinese Tea & Banquet Vibe" 
+             class="w-full h-full object-cover object-center"
+             onerror="this.src='https://placehold.co/1600x600/1A1815/C8A265?text=Oriental+Aesthetics+Menu'" />
+        <div class="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-ink-950/60"></div>
+      </div>
+
+      <div class="relative p-4 sm:p-8 lg:p-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+        <div class="max-w-2xl space-y-2 sm:space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-950/85 border border-gold-500/30 text-gold-400 text-[10px] sm:text-xs tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-cinnabar-500"></span>
+            <span id="heroBadge">新中式东方美学 · 闽南私宴与武夷岩茶</span>
+          </div>
+          
+          <h1 id="heroTitle" class="text-xl sm:text-3xl lg:text-4xl font-normal tracking-wider text-parchment-100 leading-tight">
+            山海入馔 · 岩骨茶香
+          </h1>
+          
+          <p id="heroDesc" class="text-xs sm:text-sm text-parchment-300 leading-relaxed tracking-wide font-light max-w-xl">
+            循泉州古早风物与传统官府汤羹之法，融武夷山正岩肉桂之醇厚。轻触任意卡片赏阅风味指标，底部随时展卷定制私享茶寮与生成洒金笺席单。
+          </p>
+        </div>
+
+        <!-- Quick Interactive Tip Card -->
+        <div class="w-full md:w-auto bg-ink-950/85 backdrop-blur-md p-3 rounded-xl border border-gold-500/25 shrink-0 flex items-center justify-between md:flex-col md:items-end gap-2.5">
+          <div class="text-left md:text-right">
+            <div class="text-[10px] text-parchment-400" id="wishlistStatusTitle">当前席位雅集定制</div>
+            <div class="text-xs sm:text-sm text-gold-400 font-medium mt-0.5" id="heroWishlistStatus">临水听竹轩 · 4位 · 已选 3 道雅馔</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleDockScrollExpand(true)" class="px-3 py-1.5 rounded-lg bg-gold-500/15 hover:bg-gold-500/25 border border-gold-500/40 text-gold-300 text-xs tracking-wider transition flex items-center gap-1 shrink-0">
+              <span id="heroOpenWishlistBtn">展卷定制席位</span>
+              <span>↓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       STICKY CATEGORY BAR WITH 7 SPECIFIED CATEGORIES
+       ========================================== -->
+  <nav class="sticky top-16 z-20 backdrop-blur-md bg-ink-900/90 border-y border-gold-500/15">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+      
+      <!-- Horizontal Sliding Category Tabs -->
+      <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 px-2 -mx-2">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <!-- Search Input -->
+      <div class="flex items-center gap-2 shrink-0">
+        <div class="relative flex-1 sm:w-52">
+          <input type="text" id="searchInput" oninput="handleSearch(this.value)"
+            placeholder="寻味：姜母鸭 / 土笋冻 / 牛小排..."
+            class="w-full bg-ink-950/90 border border-gold-500/20 focus:border-gold-500/60 rounded-full py-1.5 pl-8 pr-3 text-xs text-parchment-100 placeholder-parchment-400/60 focus:outline-none transition-all" />
+          <svg class="w-3.5 h-3.5 text-gold-500/70 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       MAIN MENU GALLERY SECTION
+       ========================================== -->
+  <main class="relative z-10 flex-1 max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 pt-5 pb-12">
+    
+    <!-- Section Header & Item Count -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5 border-b border-gold-500/15 pb-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 id="currentCategoryTitle" class="text-base sm:text-xl font-medium text-parchment-100 tracking-wider">
+            全部雅馔 · 东方雅集精选
+          </h2>
+          <span id="itemCountBadge" class="px-2 py-0.5 rounded-full bg-ink-800 border border-gold-500/30 text-[10px] text-gold-400 tabular-nums">
+            共 6 款雅物
+          </span>
+        </div>
+        <p id="currentCategorySub" class="text-[11px] sm:text-xs text-parchment-400 mt-1">
+          点击任意菜品卡片，赏阅大图、风味指标与风物故事
+        </p>
+      </div>
+    </div>
+
+    <!-- Responsive Menu Cards Grid -->
+    <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <!-- Dynamically populated via renderMenuGrid() -->
+    </div>
+
+  </main>
+
+  <!-- ==========================================
+       CLASSICAL ORIENTAL FOOTER
+       ========================================== -->
+  <footer class="relative z-10 border-t border-gold-500/15 bg-ink-950/90 pt-6 pb-28 px-3 sm:px-6 lg:px-8 text-center">
+    <div class="max-w-3xl mx-auto space-y-2">
+      <div class="inline-block seal-stamp px-2 py-0.5 text-[10px] rounded-sm">云起茶事</div>
+      <p id="footerQuote" class="text-xs sm:text-sm text-gold-300 tracking-widest font-light">
+        「 食有山海古早味，席伴武夷岩骨香 」
+      </p>
+      <p id="footerNote" class="text-[10px] sm:text-[11px] text-parchment-400 leading-relaxed">
+        所有私房菜品均依当日鲜活食材匠心备制 · 底部展卷可定制私享茶寮并生成传统洒金笺席单
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       FLOATING BOTTOM EXPANDABLE SCROLL DOCK
+       ========================================== -->
+  <div class="fixed bottom-2 sm:bottom-4 inset-x-0 z-30 px-2 sm:px-6 pointer-events-none">
+    <div class="max-w-4xl mx-auto bg-ink-900/95 backdrop-blur-xl border border-gold-500/50 rounded-2xl shadow-2xl pointer-events-auto overflow-hidden transition-all duration-300">
+      
+      <!-- Expandable Scroll Panel -->
+      <div id="dockExpandPanel" class="hidden border-b border-gold-500/20 bg-ink-950/95 p-3.5 sm:p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-gold-500/15 pb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="seal-stamp px-2 py-0.5 text-[10px] rounded-sm">雅集定制</span>
+            <div>
+              <h4 id="dockPanelTitle" class="text-xs sm:text-sm font-medium text-gold-300 tracking-wider">席位雅集定制卷 · 择寮与时辰</h4>
+              <p id="dockPanelSub" class="text-[10px] text-parchment-400">调整入席人数、私享茶寮与时辰，生成传统洒金笺席单</p>
+            </div>
+          </div>
+          <button onclick="toggleDockScrollExpand(false)" class="px-2 py-1 rounded bg-ink-800 hover:bg-ink-700 text-xs text-parchment-300 flex items-center gap-1">
+            <span id="collapseScrollBtnText">收卷</span>
+            <span>✕</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Left Column: Guests Slider & Time Slot -->
+          <div class="space-y-3.5">
+            <div class="bg-ink-900/90 border border-gold-500/20 rounded-xl p-3 space-y-2">
+              <div class="flex items-center justify-between">
+                <span id="dockGuestsLabel" class="text-xs text-gold-400 font-medium tracking-wider">一、入席人数（2–12位）</span>
+                <div class="flex items-center gap-2">
+                  <button onclick="adjustDiners(-1)" class="w-6 h-6 rounded bg-ink-800 text-gold-400 font-bold text-xs">-</button>
+                  <span id="dockGuestsValue" class="text-xs sm:text-sm font-semibold text-parchment-100 tabular-nums min-w-[2.8rem] text-center">4 位</span>
+                  <button onclick="adjustDiners(1)" class="w-6 h-6 rounded bg-ink-800 text-gold-400 font-bold text-xs">+</button>
+                </div>
+              </div>
+              <input type="range" id="dockGuestsSlider" min="2" max="12" value="4" oninput="setDinersValue(this.value)"
+                class="w-full accent-gold-500 cursor-pointer h-1.5 bg-ink-950 rounded-lg" />
+              <div class="flex justify-between text-[10px] text-parchment-400 tabular-nums">
+                <span>2位 · 对酌</span>
+                <span>4位 · 四方雅叙</span>
+                <span>8位 · 家族欢聚</span>
+                <span>12位 · 鸿儒圆桌</span>
+              </div>
+            </div>
+
+            <div class="bg-ink-900/90 border border-gold-500/20 rounded-xl p-3 space-y-2">
+              <div class="text-xs text-gold-400 font-medium tracking-wider" id="dockTimeLabel">二、雅集时辰</div>
+              <div id="dockTimePills" class="grid grid-cols-2 gap-1.5">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Private Tea Pavilion & Special Notes -->
+          <div class="space-y-3.5">
+            <div class="bg-ink-900/90 border border-gold-500/20 rounded-xl p-3 space-y-2">
+              <div class="text-xs text-gold-400 font-medium tracking-wider" id="dockPavilionLabel">三、私享茶寮（三处东方雅室）</div>
+              <div id="dockPavilionCards" class="space-y-1.5">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+
+            <div class="bg-ink-900/90 border border-gold-500/20 rounded-xl p-3 space-y-1.5">
+              <label for="dockBanquetNote" id="dockNoteLabel" class="text-xs text-gold-400 font-medium tracking-wider block">四、席间雅嘱 / 忌口备忘</label>
+              <input type="text" id="dockBanquetNote" oninput="updateBanquetNote(this.value)"
+                placeholder="如：寿宴布置、少油免辣、备温水冲泡等..."
+                class="w-full bg-ink-950 border border-gold-500/25 rounded-lg px-3 py-2 text-xs text-parchment-100 placeholder-parchment-400/50 focus:outline-none focus:border-gold-400" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-1 flex flex-wrap items-center justify-between gap-2.5 border-t border-gold-500/15">
+          <button onclick="openWishlistDrawer()" class="text-xs text-gold-300 hover:text-gold-200 underline underline-offset-4">
+            <span id="dockViewItemsLink">调整已选菜品明细与份数 →</span>
+          </button>
+          <button onclick="openBanquetScrollModal()"
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-cinnabar-600 via-gold-600 to-gold-500 text-parchment-100 font-semibold text-xs tracking-wider shadow-lg flex items-center gap-1.5 transition">
+            <span>📜</span>
+            <span id="dockGenerateCardBtn">生成东方雅集席单卡片</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Always-Visible Bottom Summary Bar -->
+      <div class="p-2.5 sm:p-3.5 flex items-center justify-between gap-2.5">
+        
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div onclick="openWishlistDrawer()" class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-gold-500/25 to-cinnabar-600/35 border border-gold-500/45 flex items-center justify-center cursor-pointer shrink-0">
+            <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span id="wishlistBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cinnabar-600 text-parchment-100 text-[10px] font-bold flex items-center justify-center tabular-nums border border-gold-400/40">0</span>
+          </div>
+          <div onclick="openWishlistDrawer()" class="cursor-pointer min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span id="wishlistBarTitle" class="text-xs font-medium text-parchment-100 truncate">席位雅集定制单</span>
+              <span class="text-xs text-gold-400 tabular-nums font-semibold shrink-0" id="wishlistBarTotal">¥0</span>
+            </div>
+            <p id="wishlistBarSub" class="text-[10px] text-parchment-400 truncate">临水听竹轩 · 4位</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="toggleDockScrollExpand()"
+            class="px-2.5 py-2 rounded-xl bg-ink-800 border border-gold-500/35 text-gold-300 text-xs flex items-center gap-1">
+            <span id="mobileExpandDockText">展卷</span>
+            <span id="mobileExpandArrow">▲</span>
+          </button>
+
+          <button onclick="openBanquetScrollModal()" 
+            class="px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-ink-950 font-semibold text-xs tracking-wider shadow-md transition-all active:scale-95 text-center">
+            <span id="openBanquetCardBtnText">生成雅集席单</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 1: DISH DETAIL MODAL
+       ========================================== -->
+  <div id="itemDetailModal" onclick="if(event.target === this) closeDetailModal()" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-ink-900 border-t sm:border border-gold-500/40 rounded-t-3xl sm:rounded-2xl shadow-2xl text-parchment-100 animate-card-enter">
+      
+      <div class="relative h-56 sm:h-72 w-full image-vignette overflow-hidden bg-ink-950">
+        <img id="modalItemImg" src="" alt="" class="w-full h-full object-cover" />
+        
+        <button onclick="closeDetailModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-ink-950/85 border border-gold-500/35 text-parchment-200 flex items-center justify-center">
+          ✕
+        </button>
+
+        <div class="absolute bottom-3 left-4 right-4 z-10 flex items-end justify-between gap-3">
+          <div>
+            <span id="modalItemBadge" class="inline-block seal-stamp px-2 py-0.5 rounded-sm text-[10px] mb-1.5">非遗古法</span>
+            <h3 id="modalItemTitle" class="text-xl sm:text-2xl font-semibold text-parchment-100 tracking-wide"></h3>
+            <p id="modalItemEnTitle" class="text-[11px] font-en italic text-gold-300 mt-0.5"></p>
+          </div>
+          <div class="text-right shrink-0">
+            <span id="modalItemPrice" class="text-xl sm:text-2xl font-semibold text-gold-400 tabular-nums"></span>
+            <span id="modalItemUnit" class="text-xs text-parchment-300"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-6 space-y-4">
+        <div class="space-y-2">
+          <p id="modalItemOneLiner" class="text-xs sm:text-sm text-gold-300/95 font-normal tracking-wide border-l-2 border-gold-500 pl-3 py-0.5"></p>
+          <div id="modalItemTags" class="flex flex-wrap gap-1.5 pt-1"></div>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 id="sensorySectionTitle" class="text-[10px] uppercase tracking-widest text-gold-400 font-semibold">风味感官指标 · FLAVOR PROFILE</h4>
+            <span id="modalPairingHint" class="text-[10px] text-parchment-400"></span>
+          </div>
+          <div id="modalSensoryBars" class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-ink-950/75 p-3.5 rounded-xl border border-gold-500/15"></div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-ink-950/80 border border-gold-500/20 space-y-1.5">
+          <div class="flex items-center justify-between text-[10px] text-gold-400 tracking-widest">
+            <span id="storyHeaderLabel" class="font-semibold">【 背后的故事 · 风物志 】</span>
+            <span id="modalOriginTag" class="text-parchment-300 text-[10px]"></span>
+          </div>
+          <p id="modalItemStory" class="text-xs text-parchment-200 leading-relaxed font-light"></p>
+        </div>
+
+        <div class="space-y-2.5 pt-1 border-t border-gold-500/15">
+          <h4 id="customOptionHeader" class="text-[10px] uppercase tracking-widest text-gold-400">点单偏好备注</h4>
+          <div id="modalPreferencePills" class="flex flex-wrap gap-1.5"></div>
+          <div>
+            <input type="text" id="modalCustomNote" placeholder="补充特殊忌口或嘱托（如：免葱蒜等）..."
+              class="w-full bg-ink-950 border border-gold-500/25 rounded-lg px-3 py-2 text-xs text-parchment-100 placeholder-parchment-400/50 focus:outline-none focus:border-gold-500" />
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2 bg-ink-950 border border-gold-500/30 rounded-xl px-2.5 py-1.5">
+            <button onclick="adjustModalQty(-1)" class="w-6 h-6 rounded bg-ink-800 text-gold-400 flex items-center justify-center font-bold text-sm">-</button>
+            <span id="modalQtyValue" class="w-5 text-center text-xs font-medium tabular-nums">1</span>
+            <button onclick="adjustModalQty(1)" class="w-6 h-6 rounded bg-ink-800 text-gold-400 flex items-center justify-center font-bold text-sm">+</button>
+          </div>
+
+          <button onclick="confirmAddToWishlist()" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-ink-950 font-semibold text-xs tracking-wider shadow-lg transition flex items-center justify-center gap-1.5">
+            <span>♡</span>
+            <span id="modalConfirmAddText">加入心愿单 / 点单备忘</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: MY WISHLIST / ORDER MEMO DRAWER
+       ========================================== -->
+  <div id="wishlistDrawerModal" onclick="if(event.target === this) closeWishlistDrawer()" class="fixed inset-0 z-50 hidden justify-end bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-md bg-ink-900 h-full flex flex-col border-l border-gold-500/35 shadow-2xl text-parchment-100">
+      
+      <div class="p-4 border-b border-gold-500/20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="seal-stamp px-2 py-0.5 text-[10px] rounded-sm">备忘</span>
+          <div>
+            <h3 id="drawerTitle" class="text-sm sm:text-base font-medium text-parchment-100">我的心愿单 / 点单备忘</h3>
+            <p id="drawerSubtitle" class="text-[10px] text-gold-400">可增减份数或生成洒金笺席单卡片</p>
+          </div>
+        </div>
+        <button onclick="closeWishlistDrawer()" class="w-7 h-7 rounded-full bg-ink-800 text-parchment-300 flex items-center justify-center">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 space-y-4">
+        <div class="bg-ink-950/85 border border-gold-500/20 rounded-xl p-3 space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div id="dinerCountLabel" class="text-xs text-parchment-200 font-medium">入席人数（2–12位）</div>
+            </div>
+            <div class="flex items-center gap-2 bg-ink-900 border border-gold-500/25 rounded-lg px-2 py-1">
+              <button onclick="adjustDiners(-1)" class="w-5 h-5 rounded bg-ink-800 text-gold-400 font-bold text-xs">-</button>
+              <span id="dinerCountValue" class="text-xs font-semibold text-gold-400 tabular-nums px-1">4 位</span>
+              <button onclick="adjustDiners(1)" class="w-5 h-5 rounded bg-ink-800 text-gold-400 font-bold text-xs">+</button>
+            </div>
+          </div>
+
+          <div class="pt-2.5 border-t border-gold-500/15 flex items-center justify-between gap-3">
+            <span id="tableSelectLabel" class="text-xs text-parchment-300 shrink-0">私享茶寮</span>
+            <select id="tableRoomSelect" onchange="selectPavilion(this.value)"
+              class="bg-ink-900 border border-gold-500/30 rounded-lg px-2.5 py-1 text-xs text-gold-300 focus:outline-none">
+            </select>
+          </div>
+
+          <div class="pt-2.5 border-t border-gold-500/15 flex items-center justify-between gap-3">
+            <span id="timeSlotSelectLabel" class="text-xs text-parchment-300 shrink-0">雅集时辰</span>
+            <select id="timeSlotSelect" onchange="selectTimeSlot(this.value)"
+              class="bg-ink-900 border border-gold-500/30 rounded-lg px-2.5 py-1 text-xs text-gold-300 focus:outline-none">
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 id="selectedListHeader" class="text-[10px] tracking-widest text-gold-400 uppercase font-semibold">已选心愿菜品与茗茶</h4>
+            <button onclick="clearWishlist()" class="text-[10px] text-parchment-400 hover:text-cinnabar-500" id="clearWishlistBtn">清空备忘</button>
+          </div>
+
+          <div id="wishlistItemsContainer" class="space-y-2.5"></div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-ink-950 border-t border-gold-500/25 space-y-3">
+        <div class="flex items-baseline justify-between">
+          <div>
+            <span id="estTotalLabel" class="text-xs text-parchment-300">预估总计</span>
+            <span id="perPersonEst" class="text-[10px] text-parchment-400 ml-1.5 tabular-nums"></span>
+          </div>
+          <span id="drawerTotalPrice" class="text-xl font-semibold text-gold-400 tabular-nums">¥0</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button onclick="openBanquetScrollModal()" 
+            class="py-2.5 px-3 rounded-xl bg-gradient-to-r from-cinnabar-600 to-gold-600 text-parchment-100 font-semibold text-xs tracking-wider shadow-md flex items-center justify-center gap-1.5">
+            <span>📜</span>
+            <span id="waiterModeBtnText">生成席单卡片</span>
+          </button>
+
+          <button onclick="copyWishlistSummary()" 
+            class="py-2.5 px-3 rounded-xl bg-ink-800 border border-gold-500/35 text-gold-300 font-medium text-xs tracking-wider flex items-center justify-center gap-1.5">
+            <span id="copyWishlistBtnText">复制预订文字</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 3: 传统洒金笺·东方雅集席单卡片 (OPTIMIZED FOR MOBILE & IMAGE EXPORT)
+       ========================================== -->
+  <div id="waiterCardModal" onclick="if(event.target === this) closeWaiterCardModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-6 bg-black/95 backdrop-blur-md">
+    
+    <!-- Outer Wrapper -->
+    <div class="relative w-full max-w-md max-h-[95vh] overflow-y-auto rounded-2xl p-1.5 bg-gradient-to-b from-gold-400/70 via-gold-600/40 to-gold-400/70 shadow-2xl transition-all">
+      
+      <!-- Gold-Flecked Xuan Paper Surface (with proper padding to prevent border clipping) -->
+      <div id="sajinPaperSurface" class="relative rounded-xl p-5 sm:p-7 text-[#221D17] transition-all"
+           style="background-color: #F4EFE6; background-image: radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.35) 1.5px, transparent 2px), radial-gradient(circle at 76% 14%, rgba(197, 160, 89, 0.45) 0%, rgba(197, 160, 89, 0.45) 2px, transparent 2.5px), radial-gradient(circle at 42% 68%, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.4) 1.5px, transparent 2px), radial-gradient(circle at 85% 78%, rgba(180, 138, 62, 0.38) 0%, rgba(180, 138, 62, 0.38) 2.2px, transparent 3px); background-size: 140px 140px;">
+        
+        <!-- Double-Line Classical Oriental Frame with Inner Spacing -->
+        <div class="border-2 border-[#8C6D3F]/60 p-1.5 rounded-lg">
+          <div class="border border-[#8C6D3F]/35 p-4 sm:p-5 rounded space-y-4 relative">
+            
+            <!-- Close Button (Ignored during html2canvas) -->
+            <button data-html2canvas-ignore="true" onclick="closeWaiterCardModal()" class="absolute top-2 right-2 w-6 h-6 rounded-full bg-[#221D17]/10 hover:bg-[#221D17]/20 text-[#221D17] flex items-center justify-center text-xs transition" title="关闭">
+              ✕
+            </button>
+
+            <!-- Scroll Header -->
+            <div class="text-center space-y-1 border-b-2 border-[#8C6D3F]/30 pb-3">
+              <div class="inline-block seal-stamp px-2.5 py-0.5 text-[10px] rounded-sm mb-0.5">雅集珍席</div>
+              <h3 id="waiterCardTitle" class="text-xl sm:text-2xl font-bold tracking-[0.18em] text-[#1A1612]">云起·东方雅集席单</h3>
+              <p class="text-[9px] tracking-[0.2em] text-[#705528] uppercase font-en">YUNQI PRIVATE TEA & BANQUET SCROLL</p>
+            </div>
+
+            <!-- Metadata Box -->
+            <div class="bg-[#EAE2D3]/85 border border-[#8C6D3F]/35 rounded-lg p-3 grid grid-cols-3 gap-2 text-left">
+              <div>
+                <div class="text-[9px] text-[#705528] tracking-widest" id="cardRoomLabel">【 私享茶寮 】</div>
+                <div id="cardRoomValue" class="text-xs font-bold text-[#1A1612] mt-0.5 truncate">临水听竹轩</div>
+              </div>
+              <div>
+                <div class="text-[9px] text-[#705528] tracking-widest" id="cardTimeLabel">【 雅集时辰 】</div>
+                <div id="cardTimeValue" class="text-xs font-bold text-[#1A1612] mt-0.5 truncate">晚宴 · 戌时</div>
+              </div>
+              <div>
+                <div class="text-[9px] text-[#705528] tracking-widest" id="cardGuestsLabel">【 入席宾客 】</div>
+                <div id="cardGuestsValue" class="text-xs font-bold text-[#9B2C20] mt-0.5 tabular-nums">4 位尊客</div>
+              </div>
+            </div>
+
+            <!-- Itemized List -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-[10px] text-[#705528] tracking-widest border-b border-[#8C6D3F]/25 pb-1">
+                <span id="cardColDish">入席珍馐与岩茶</span>
+                <span id="cardColQty">份数 / 礼金</span>
+              </div>
+              <div id="waiterCardItems" class="divide-y divide-[#8C6D3F]/20"></div>
+            </div>
+
+            <!-- Remarks if any -->
+            <div id="cardRemarksBox" class="hidden bg-[#9B2C20]/10 border border-[#9B2C20]/30 rounded-lg p-2.5 text-xs text-[#782016]">
+              <span class="font-semibold">席间雅嘱：</span>
+              <span id="cardRemarksText"></span>
+            </div>
+
+            <!-- Footer Stamp -->
+            <div class="pt-2 border-t-2 border-[#8C6D3F]/30 flex items-end justify-between">
+              <div class="space-y-0.5">
+                <div id="waiterCardHint" class="text-[10px] text-[#5C4D3C]">出示给侍茶师或保存为图片</div>
+                <div id="cardDateStamp" class="text-[9px] text-[#8C6D3F] font-en tracking-widest"></div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-[10px] text-[#705528]" id="waiterTotalLabel">预估合计</div>
+                <div id="waiterCardTotal" class="text-xl font-bold text-[#9B2C20] tabular-nums">¥0</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons inside Modal (Ignored by html2canvas) -->
+      <div data-html2canvas-ignore="true" class="mt-3 grid grid-cols-3 gap-2">
+        <button id="saveScrollImgBtn" onclick="saveBanquetScrollAsImage()"
+          class="py-2.5 px-2 rounded-xl bg-gradient-to-r from-[#8C6D3F] to-[#705528] text-[#F7F4EE] font-semibold text-xs tracking-wider shadow-md transition flex items-center justify-center gap-1">
+          <span>📷</span>
+          <span id="saveScrollImgBtnText">保存图片</span>
+        </button>
+
+        <button onclick="copyWishlistSummary()"
+          class="py-2.5 px-2 rounded-xl bg-[#9B2C20] text-[#F7F4EE] font-semibold text-xs tracking-wider shadow-md transition flex items-center justify-center gap-1">
+          <span>📋</span>
+          <span id="waiterCopyBtn">复制文字</span>
+        </button>
+
+        <button onclick="toggleWaiterLargePrint()"
+          class="py-2.5 px-2 rounded-xl bg-[#221D17] text-[#EFE2C6] text-xs font-medium tracking-wider transition flex items-center justify-center gap-1">
+          <span>🔍</span>
+          <span id="largePrintToggleText">大字模式</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 4: CURATOR LIVE ITEM EDITOR MODAL
+       ========================================== -->
+  <div id="curatorEditorModal" onclick="if(event.target === this) closeCuratorEditor()" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md">
+    <div class="relative w-full max-w-xl max-h-[92vh] overflow-y-auto bg-ink-900 border border-gold-500/50 rounded-2xl shadow-2xl text-parchment-100 p-4 sm:p-6 space-y-4">
+      
+      <div class="flex items-center justify-between border-b border-gold-500/20 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="seal-stamp px-2 py-0.5 text-[10px] rounded-sm">主理人</span>
+          <div>
+            <h3 id="curatorModalTitle" class="text-sm sm:text-base font-semibold text-gold-300">编辑单品（免代码实时保存）</h3>
+            <p class="text-[10px] text-parchment-400">修改后自动保存在浏览器中，支持上传实拍图</p>
+          </div>
+        </div>
+        <button onclick="closeCuratorEditor()" class="w-7 h-7 rounded-full bg-ink-800 text-parchment-300 flex items-center justify-center">✕</button>
+      </div>
+
+      <form id="curatorForm" onsubmit="saveCuratorItem(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="editItemId" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">菜品/茗茶中文名 *</label>
+            <input type="text" id="editNameZh" required placeholder="如：闽南传统姜母鸭"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none focus:border-gold-400" />
+          </div>
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">英文名称</label>
+            <input type="text" id="editNameEn" placeholder="e.g. Minnan Ginger Duck"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none focus:border-gold-400" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">所属分类 *</label>
+            <select id="editCategory" class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-2 py-2 text-parchment-100 focus:outline-none">
+              <option value="minhai">闽海主肴</option>
+              <option value="huoxiang">镬香热馔</option>
+              <option value="quanyun">泉韵主膳</option>
+              <option value="qingshu">清蔬臻味</option>
+              <option value="dingdun">鼎炖位汤</option>
+              <option value="ganyun">甘韵甜珍</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">价格 (¥) *</label>
+            <input type="number" id="editPrice" required min="1" placeholder="168"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 tabular-nums focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">单位</label>
+            <input type="text" id="editUnitZh" placeholder="例/位/煲"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">角标</label>
+            <input type="text" id="editBadgeZh" placeholder="非遗古法"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">风味标签（用逗号分隔）</label>
+            <input type="text" id="editTagsZh" placeholder="三年陈老姜, 砂煲慢焗"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-gold-400 mb-1 font-medium">产地与工艺</label>
+            <input type="text" id="editOriginZh" placeholder="泉州古早味 · 砂煲慢焗"
+              class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-gold-400 mb-1 font-medium">一句话意境文案 *</label>
+          <input type="text" id="editOneLinerZh" required placeholder="三年老姜拍裂铺底，正番鸭文火慢焗..."
+            class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-gold-400 mb-1 font-medium">风物志详情</label>
+          <textarea id="editStoryZh" rows="2" placeholder="输入历史渊源与冲泡讲究..."
+            class="w-full bg-ink-950 border border-gold-500/30 rounded-lg px-3 py-2 text-parchment-100 focus:outline-none"></textarea>
+        </div>
+
+        <div class="p-3 rounded-xl bg-ink-950 border border-gold-500/25 space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="text-gold-400 font-medium">菜品图片（支持链接或本地拍照上传）</label>
+            <label class="cursor-pointer px-2.5 py-1 rounded bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 text-[10px]">
+              <span>📷 上传本地照片</span>
+              <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event)" />
+            </label>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <img id="editImgPreview" src="" alt="Preview" class="w-12 h-12 rounded-lg object-cover border border-gold-500/30 bg-ink-900 shrink-0" />
+            <input type="text" id="editImage" placeholder="https://..." oninput="document.getElementById('editImgPreview').src = this.value"
+              class="flex-1 bg-ink-900 border border-gold-500/30 rounded-lg px-3 py-1.5 text-xs text-parchment-100 focus:outline-none" />
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between gap-3">
+          <button type="button" id="deleteItemBtn" onclick="deleteCurrentCuratorItem()" class="hidden px-3 py-2 rounded-xl bg-cinnabar-600/25 text-cinnabar-500 text-xs">
+            删除单品
+          </button>
+          <div class="flex items-center gap-2 ml-auto">
+            <button type="button" onclick="closeCuratorEditor()" class="px-4 py-2 rounded-xl bg-ink-800 text-parchment-300 text-xs">取消</button>
+            <button type="submit" class="px-5 py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-ink-950 font-semibold text-xs shadow-md">保存修改</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 5: RESET CONFIRM MODAL
+       ========================================== -->
+  <div id="resetConfirmModal" onclick="if(event.target === this) closeResetConfirmModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-sm bg-ink-900 border border-gold-500/40 rounded-2xl p-5 text-center space-y-3 shadow-2xl">
+      <div class="inline-block seal-stamp px-2 py-0.5 text-[10px] rounded-sm">重置确认</div>
+      <h4 class="text-sm font-medium text-parchment-100">确定恢复初始默认菜单？</h4>
+      <p class="text-xs text-parchment-400">此操作将清除您自定义修改的菜品数据。</p>
+      <div class="flex items-center gap-2.5 pt-1">
+        <button onclick="closeResetConfirmModal()" class="flex-1 py-2 rounded-xl bg-ink-800 text-parchment-200 text-xs">取消</button>
+        <button onclick="confirmResetMenuData()" class="flex-1 py-2 rounded-xl bg-cinnabar-600 text-white text-xs font-semibold">确认恢复</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2">
+    <div class="px-3.5 py-1.5 rounded-full bg-ink-900/95 border border-gold-500/60 text-gold-300 text-xs tracking-wider shadow-xl flex items-center gap-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+      <span id="toastMessage">已加入心愿单</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT APPLICATION LOGIC
+       ========================================== -->
+  <script>
+    const STORAGE_KEY_MENU = 'yunqi_oriental_menu_v4';
+
+    const DEFAULT_MENU_ITEMS = [
+      {
+        id: 'dish-jiangmuya',
+        category: 'minhai',
+        nameZh: '闽南传统姜母鸭',
+        nameEn: 'Minnan Traditional Ginger Duck',
+        price: 168,
+        unitZh: '煲',
+        unitEn: 'claypot',
+        badgeZh: '非遗古法',
+        badgeEn: 'Heritage',
+        originZh: '泉州古早味 · 粗陶砂煲慢焗',
+        originEn: 'Quanzhou Heritage',
+        pairingZh: '宜佐：马头岩肉桂 / 老枞水仙',
+        pairingEn: 'Pairs with: Rougui',
+        tagsZh: ['三年陈老姜', '古法黑麻油', '砂煲慢焗'],
+        tagsEn: ['Aged Ginger', 'Sesame Oil', 'Claypot'],
+        oneLinerZh: '三年老姜拍裂铺底，正番鸭佐纯黑麻油与米酒文火慢焗，揭盖浓香四溢。',
+        oneLinerEn: 'Three-year aged ginger layered beneath duck, slow-braised in sesame oil and rice wine.',
+        storyZh: '源自泉州闽南古早味食补佳肴。精选散养正番鸭与漳州三年陈老姜，老姜拍裂铺满砂煲底部，以古法胡麻油慢火煸香，全程不加一滴水，仅凭米酒慢焗收汁。',
+        storyEn: 'An iconic culinary heritage of Southern Fujian.',
+        image: 'https://images.unsplash.com/photo-1514944298352-f4d732142f74?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '姜香馥郁度', value: 95 },
+          { labelZh: '酱汁醇厚度', value: 92 },
+          { labelZh: '肉质酥嫩度', value: 90 },
+          { labelZh: '温润回甘度', value: 88 }
+        ]
+      },
+      {
+        id: 'dish-tusundong',
+        category: 'quanyun',
+        nameZh: '安海土笋冻',
+        nameEn: 'Anhai Sipunculid Jelly',
+        price: 68,
+        unitZh: '例',
+        unitEn: 'portion',
+        badgeZh: '闽南风物',
+        badgeEn: 'Delicacy',
+        originZh: '晋江安海滩涂 · 天然胶质成冻',
+        originEn: 'Anhai Tidal Flats',
+        pairingZh: '宜佐：永春老醋 / 蒜蓉甜辣酱',
+        pairingEn: 'Served with: Aged Vinegar',
+        tagsZh: ['滩涂鲜物', '天然胶原', '冰爽脆嫩'],
+        tagsEn: ['Tidal Delicacy', 'Collagen', 'Crisp'],
+        oneLinerZh: '取晋江安海滩涂鲜活沙虫，熬出天然胶质凝结成冻，晶莹剔透，脆嫩清甜。',
+        oneLinerEn: 'Fresh marine sandworms simmered to natural collagen jelly.',
+        storyZh: '泉州安海传承数百年的海洋风味奇珍。每日清晨采捕自安海滩涂的鲜活土笋，经手工反复揉洗熬煮，静置冷却凝结如白玉琥珀。',
+        storyEn: 'A centuries-old coastal delicacy from Anhai, Quanzhou.',
+        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '海洋鲜甜度', value: 96 },
+          { labelZh: '爽脆Q弹度', value: 94 },
+          { labelZh: '胶质清润度', value: 90 },
+          { labelZh: '蒜醋开胃度', value: 88 }
+        ]
+      },
+      {
+        id: 'dish-niuxiaopai',
+        category: 'huoxiang',
+        nameZh: '脆皮牛小排',
+        nameEn: 'Crispy Prime Short Ribs',
+        price: 238,
+        unitZh: '例',
+        unitEn: 'portion',
+        badgeZh: '中西合璧',
+        badgeEn: 'Signature',
+        originZh: '东方香料慢卤 · 高温脆皮锁汁',
+        originEn: 'Spiced Slow-Braise',
+        pairingZh: '宜佐：陈年大红袍 / 马头岩肉桂',
+        pairingEn: 'Pairs with: Dahongpao',
+        tagsZh: ['外酥里嫩', '雪花丰腴', '茶香解腻'],
+        tagsEn: ['Crispy', 'Juicy', 'Tender'],
+        oneLinerZh: '精选谷饲牛小排先以东方香料慢卤入味，再经高温锁汁，外层焦香酥脆，内里丰腴多汁。',
+        oneLinerEn: 'Grain-fed prime beef short ribs slow-braised and seared.',
+        storyZh: '融合传统中式小火慢卤与现代西式炙烤工艺的匠心之作。严选雪花牛肉，经新会陈皮与老卤文火慢炖后猛火脆煎。',
+        storyEn: 'Bridging Chinese braising and modern roasting.',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '油脂丰腴度', value: 94 },
+          { labelZh: '表皮酥脆度', value: 92 },
+          { labelZh: '卤香层次感', value: 90 },
+          { labelZh: '肉汁饱满度', value: 95 }
+        ]
+      },
+      {
+        id: 'dish-huotongchi',
+        category: 'dingdun',
+        nameZh: '迷你火瞳翅',
+        nameEn: 'Mini Jinhua Ham Golden Broth',
+        price: 198,
+        unitZh: '位',
+        unitEn: 'guest',
+        badgeZh: '古法浓汤',
+        badgeEn: 'Broth',
+        originZh: '金华三年火瞳 · 八小时隔水精炖',
+        originEn: '3-Year Jinhua Ham',
+        pairingZh: '宜佐：餐前暖胃 · 位上尊享',
+        pairingEn: 'Individual Porcelain Pot',
+        tagsZh: ['位上珍馐', '金汤粘唇', '八小时慢炖'],
+        tagsEn: ['Individual', 'Collagen', 'Simmered'],
+        oneLinerZh: '取金华三年火腿精华“火瞳”与老母鸡文火精炖八小时，汤色金黄透亮，胶质粘唇。',
+        oneLinerEn: 'Crafted from center knuckle of Jinhua ham, double-boiled 8 hours.',
+        storyZh: '甄选金华三年陈火腿中骨髓最饱满的“火瞳”部位，配以散养老母鸡与瑶柱，在定制紫砂盅内隔水慢炖足足八小时。',
+        storyEn: 'An homage to classical banquet soup mastery.',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '金汤醇厚度', value: 98 },
+          { labelZh: '胶质粘唇感', value: 95 },
+          { labelZh: '火瞳咸鲜度', value: 92 },
+          { labelZh: '余韵悠长度', value: 94 }
+        ]
+      },
+      {
+        id: 'dish-qingshu-bamboo',
+        category: 'qingshu',
+        nameZh: '鸡汤津白煨武夷冬笋',
+        nameEn: 'Wuyi Winter Bamboo Shoots',
+        price: 98,
+        unitZh: '例',
+        unitEn: 'portion',
+        badgeZh: '山野时鲜',
+        badgeEn: 'Greens',
+        originZh: '武夷山场冬笋 · 清鸡汤文火慢煨',
+        originEn: 'Wuyi Mountain Bamboo',
+        pairingZh: '宜佐：武夷奇种 / 清香铁观音',
+        pairingEn: 'Pairs with: Oolong',
+        tagsZh: ['山林清甜', '脆嫩无渣', '高汤入魂'],
+        tagsEn: ['Crisp', 'Sweet', 'Broth'],
+        oneLinerZh: '严选武夷山破土冬笋与霜降津白芯，以清澈老母鸡高汤文火煨透，清甜入魂。',
+        oneLinerEn: 'Fresh Wuyi winter bamboo shoots and cabbage hearts.',
+        storyZh: '取自武夷山深处未出土的黄泥冬笋，笋肉洁白如玉、脆嫩无渣。配以霜降后的津白芯，用清澈老母鸡汤文火慢煨。',
+        storyEn: 'Harvested from beneath the yellow clay of Wuyi Mountain.',
+        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '山野清甜度', value: 96 },
+          { labelZh: '笋肉脆嫩度', value: 94 },
+          { labelZh: '鸡汤鲜醇度', value: 90 },
+          { labelZh: '清新解腻度', value: 95 }
+        ]
+      },
+      {
+        id: 'tea-rougui',
+        category: 'ganyun',
+        nameZh: '马头岩肉桂 · 佐古法茶点',
+        nameEn: 'Matouyan Rougui Rock Tea',
+        price: 168,
+        unitZh: '席',
+        unitEn: 'set',
+        badgeZh: '甘韵茗珍',
+        badgeEn: 'Tea & Sweets',
+        originZh: '武夷山马头岩 · 佐手工绿豆糕与柑饼',
+        originEn: 'Matouyan Cliff Tea',
+        pairingZh: '建水紫陶壶 · 100°C沸水悬壶高冲',
+        pairingEn: 'Jianshui Clay Pot',
+        tagsZh: ['岩骨花香', '手工茶果', '甘润收官'],
+        tagsEn: ['Charcoal Tea', 'Pastry', 'Sweet Finish'],
+        oneLinerZh: '武夷正岩马头岩肉桂足火慢焙，奉席配以闽南古法冰心绿豆糕与九制老柑饼。',
+        oneLinerEn: 'Charcoal-roasted Matouyan Rougui rock tea with pastries.',
+        storyZh: '采自武夷山正岩核心产区马头岩，经传统果木炭火慢炖，开汤桂皮辛香显露。随茶奉上手工绿豆糕与老柑饼。',
+        storyEn: 'Grown in weathered gravel soil on Matouyan Cliff.',
+        image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=80',
+        metrics: [
+          { labelZh: '岩韵辛锐度', value: 95 },
+          { labelZh: '茶点清甜度', value: 91 },
+          { labelZh: '桂皮馥郁度', value: 94 },
+          { labelZh: '喉韵回甘度', value: 96 }
+        ]
+      }
+    ];
+
+    let MENU_ITEMS = loadMenuFromStorage();
+
+    function loadMenuFromStorage() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_MENU);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+      return JSON.parse(JSON.stringify(DEFAULT_MENU_ITEMS));
+    }
+
+    function saveMenuToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY_MENU, JSON.stringify(MENU_ITEMS));
+      } catch (e) {
+        showToast('图片较大，请使用压缩后的图片或外链');
+      }
+    }
+
+    const PAVILIONS = [
+      { id: '临水听竹轩', nameZh: '临水听竹轩', nameEn: 'Waterside Bamboo Pavilion', descZh: '曲水映竹 · 听泉清谈 (2-6位)', descEn: 'Waterside view (2-6 guests)' },
+      { id: '红砖古厝阁', nameZh: '红砖古厝阁', nameEn: 'Red-Brick Courtyard', descZh: '闽南燕尾脊古厝 · 圆桌 (6-12位)', descEn: 'Courtyard round table (6-12 guests)' },
+      { id: '幽篁松风寮', nameZh: '幽篁松风寮', nameEn: 'Secluded Pine Room', descZh: '炭炉煮水听松 · 榻榻米 (2-8位)', descEn: 'Pine breeze tatami (2-8 guests)' }
+    ];
+
+    const TIME_SLOTS = [
+      { id: '午席 · 未时 (12:00-14:30)', labelZh: '午席 · 未时', subZh: '12:00 - 14:30', labelEn: 'Noon Banquet' },
+      { id: '申时茶叙 · 申时 (15:00-17:30)', labelZh: '申时茶叙 · 申时', subZh: '15:00 - 17:30', labelEn: 'Afternoon Tea' },
+      { id: '晚宴 · 戌时 (18:30-21:30)', labelZh: '晚宴 · 戌时', subZh: '18:30 - 21:30', labelEn: 'Evening Banquet' },
+      { id: '夜阑茗谈 · 亥时 (21:30-23:30)', labelZh: '夜阑茗谈 · 亥时', subZh: '21:30 - 23:30', labelEn: 'Late Night Tea' }
+    ];
+
+    // 7 Specified Categories
+    const CATEGORIES = [
+      { id: 'all', nameZh: '全部雅馔', nameEn: 'All Curations' },
+      { id: 'minhai', nameZh: '闽海主肴', nameEn: 'Minnan Mains' },
+      { id: 'huoxiang', nameZh: '镬香热馔', nameEn: 'Wok Delicacies' },
+      { id: 'quanyun', nameZh: '泉韵主膳', nameEn: 'Quanzhou Staples' },
+      { id: 'qingshu', nameZh: '清蔬臻味', nameEn: 'Seasonal Greens' },
+      { id: 'dingdun', nameZh: '鼎炖位汤', nameEn: 'Individual Broths' },
+      { id: 'ganyun', nameZh: '甘韵甜珍', nameEn: 'Sweets & Tea' }
+    ];
+
+    const PREFERENCE_OPTIONS = [
+      { id: 'standard', zh: '主厨标准风味', en: 'Chef Standard' },
+      { id: 'light', zh: '少油清淡', en: 'Light & Less Oil' },
+      { id: 'hot', zh: '趁热先上', en: 'Serve First' },
+      { id: 'tea-pair', zh: '随茶同享', en: 'Serve with Tea' }
+    ];
+
+    let state = {
+      lang: 'zh',
+      activeCategory: 'all',
+      searchQuery: '',
+      mobileCols: 1,
+      curatorMode: false,
+      dockExpanded: false,
+      largePrintWaiterMode: false,
+      activeItem: null,
+      modalQty: 1,
+      selectedPrefId: 'standard',
+      diners: 4,
+      tableRoom: '临水听竹轩',
+      timeSlot: '晚宴 · 戌时 (18:30-21:30)',
+      banquetNote: '',
+      wishlist: [
+        { itemId: 'dish-jiangmuya', qty: 1, prefId: 'standard', note: '' },
+        { itemId: 'dish-huotongchi', qty: 4, prefId: 'hot', note: '按位上席' },
+        { itemId: 'tea-rougui', qty: 1, prefId: 'tea-pair', note: '紫陶壶冲泡' }
+      ]
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initAmbientMistCanvas();
+      renderAll();
+    });
+
+    function renderAll() {
+      renderStaticText();
+      renderCategories();
+      renderMenuGrid();
+      renderDockCustomizationPanel();
+      renderWishlistDock();
+    }
+
+    function renderStaticText() {
+      const isZh = state.lang === 'zh';
+      document.getElementById('brandTitle').textContent = isZh ? '云起·闽宴茶事' : 'YUNQI · BANQUET';
+      document.getElementById('langIndicator').textContent = isZh ? '中 / EN' : 'EN / 中';
+      document.getElementById('curatorModeBtnText').textContent = isZh
+        ? (state.curatorMode ? '退出编辑' : '主理人模式')
+        : (state.curatorMode ? 'Exit' : 'Curator');
+
+      document.getElementById('mobileColText').textContent = isZh
+        ? (state.mobileCols === 1 ? '双列' : '单列')
+        : (state.mobileCols === 1 ? '2-Col' : '1-Col');
+
+      document.getElementById('heroBadge').textContent = isZh
+        ? '新中式东方美学 · 闽南私宴与武夷岩茶'
+        : 'NEO-CHINESE AESTHETICS · MINNAN & WUYI TEA';
+      document.getElementById('heroTitle').textContent = isZh
+        ? '山海入馔 · 岩骨茶香'
+        : 'Mountain & Sea Delicacies · Wuyi Rock Tea';
+      document.getElementById('heroDesc').textContent = isZh
+        ? '循泉州古早风物与传统官府汤羹之法，融武夷山正岩肉桂之醇厚。轻触任意卡片赏阅风味指标，底部随时展卷定制私享茶寮与生成洒金笺席单。'
+        : 'Rooted in heritage Southern Fujian flavors and slow-simmered imperial broths, paired with charcoal-roasted Wuyi rock teas.';
+
+      document.getElementById('wishlistStatusTitle').textContent = isZh ? '当前席位雅集定制' : 'Banquet Curation';
+      document.getElementById('heroOpenWishlistBtn').textContent = isZh ? '展卷定制席位' : 'Customize';
+      document.getElementById('searchInput').placeholder = isZh ? '寻味：姜母鸭 / 土笋冻 / 牛小排...' : 'Search dishes...';
+
+      const activeCatObj = CATEGORIES.find(c => c.id === state.activeCategory) || CATEGORIES[0];
+      document.getElementById('currentCategoryTitle').textContent = isZh
+        ? `${activeCatObj.nameZh} · 东方雅集精选`
+        : `${activeCatObj.nameEn} · Curated Selection`;
+      document.getElementById('currentCategorySub').textContent = state.curatorMode
+        ? (isZh ? '【主理人模式已开】点击任意卡片修改图文与价格' : 'Curator Mode ON')
+        : (isZh ? '点击任意菜品卡片，赏阅大图、风味指标与风物故事' : 'Tap any card for metrics and backstory');
+
+      document.getElementById('wishlistBarTitle').textContent = isZh ? '席位雅集定制单' : 'Banquet Scroll';
+      document.getElementById('openBanquetCardBtnText').textContent = isZh ? '生成雅集席单' : 'Generate Card';
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoryTabs');
+      const isZh = state.lang === 'zh';
+      container.innerHTML = CATEGORIES.map(cat => {
+        const isActive = state.activeCategory === cat.id;
+        const count = cat.id === 'all'
+          ? MENU_ITEMS.length
+          : MENU_ITEMS.filter(i => i.category === cat.id).length;
+        return `
+          <button onclick="selectCategory('${cat.id}')"
+            class="shrink-0 px-3.5 py-1.5 rounded-full text-xs tracking-wider transition-all flex items-center gap-1.5 ${
+              isActive
+                ? 'cat-btn-active font-semibold scale-105'
+                : 'bg-ink-950/75 text-parchment-300 border border-gold-500/20 hover:border-gold-500/50 hover:text-gold-300'
+            }">
+            <span>${isZh ? cat.nameZh : cat.nameEn}</span>
+            <span class="text-[10px] tabular-nums opacity-80">(${count})</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectCategory(catId) {
+      state.activeCategory = catId;
+      renderAll();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val.trim().toLowerCase();
+      renderMenuGrid();
+    }
+
+    function toggleLanguage() {
+      state.lang = state.lang === 'zh' ? 'en' : 'zh';
+      renderAll();
+      showToast(state.lang === 'zh' ? '已切换至中文雅集菜单' : 'Switched to English');
+    }
+
+    function toggleMobileGridCols() {
+      state.mobileCols = state.mobileCols === 1 ? 2 : 1;
+      const grid = document.getElementById('menuGrid');
+      if (state.mobileCols === 2) {
+        grid.classList.remove('grid-cols-1');
+        grid.classList.add('grid-cols-2');
+      } else {
+        grid.classList.remove('grid-cols-2');
+        grid.classList.add('grid-cols-1');
+      }
+      renderStaticText();
+      renderMenuGrid();
+      showToast(state.lang === 'zh'
+        ? (state.mobileCols === 2 ? '已切换为手机双列紧凑视图' : '已切换为手机单列大图视图')
+        : (state.mobileCols === 2 ? 'Switched to 2-Column' : 'Switched to 1-Column'));
+    }
+
+    function renderMenuGrid() {
+      const grid = document.getElementById('menuGrid');
+      const isZh = state.lang === 'zh';
+      const isCompactMobile = state.mobileCols === 2;
+
+      const filtered = MENU_ITEMS.filter(item => {
+        const matchCat = state.activeCategory === 'all' || item.category === state.activeCategory;
+        if (!matchCat) return false;
+        if (!state.searchQuery) return true;
+        const haystack = `${item.nameZh} ${item.nameEn} ${item.tagsZh.join(' ')} ${item.oneLinerZh} ${item.storyZh}`.toLowerCase();
+        return haystack.includes(state.searchQuery);
+      });
+
+      document.getElementById('itemCountBadge').textContent = isZh ? `共 ${filtered.length} 款雅物` : `${filtered.length} Dishes`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center space-y-2 border border-dashed border-gold-500/25 rounded-xl">
+            <p class="text-gold-400 text-sm">${isZh ? '未寻得匹配的菜品或茗茶' : 'No matching items found'}</p>
+            <button onclick="selectCategory('all'); document.getElementById('searchInput').value=''; handleSearch('');"
+              class="px-3 py-1 rounded-full bg-ink-800 text-xs text-parchment-200 border border-gold-500/30">
+              ${isZh ? '查看全部雅馔' : 'Reset Filter'}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item, idx) => {
+        const title = isZh ? item.nameZh : item.nameEn;
+        const subTitle = isZh ? item.nameEn : item.nameZh;
+        const unit = isZh ? item.unitZh : item.unitEn;
+        const badge = isZh ? item.badgeZh : item.badgeEn;
+        const tags = isZh ? item.tagsZh : item.tagsEn;
+        const oneLiner = isZh ? item.oneLinerZh : item.oneLinerEn;
+        const topMetric = item.metrics && item.metrics[0] ? item.metrics[0] : { labelZh: '风味指数', value: 92 };
+
+        const savedQty = state.wishlist.filter(w => w.itemId === item.id).reduce((sum, w) => sum + w.qty, 0);
+
+        return `
+          <article onclick="${state.curatorMode ? `openCuratorEditor('${item.id}')` : `openDetailModal('${item.id}')`}" 
+            style="animation-delay: ${idx * 40}ms"
+            class="oriental-card animate-card-enter rounded-2xl overflow-hidden flex flex-col cursor-pointer group relative ${state.curatorMode ? 'ring-1 ring-gold-400/60' : ''}">
+            
+            <div class="relative ${isCompactMobile ? 'h-32 sm:h-52' : 'h-48 sm:h-56'} w-full overflow-hidden image-vignette bg-ink-950">
+              <img src="${item.image}" alt="${title}" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                onerror="this.src='https://placehold.co/800x600/1A1815/C8A265?text=Oriental+Delicacy'" />
+              
+              <div class="absolute top-2.5 left-2.5 z-10 seal-stamp px-2 py-0.5 text-[9px] rounded-sm">
+                ${badge}
+              </div>
+
+              <div onclick="event.stopPropagation();" class="absolute top-2.5 right-2.5 z-10 flex items-center gap-1">
+                ${state.curatorMode ? `
+                  <button onclick="openCuratorEditor('${item.id}')"
+                    class="h-7 px-2.5 rounded-full bg-gold-500 text-ink-950 font-semibold text-[11px] shadow flex items-center gap-1">
+                    <span>✎</span>
+                    <span>编辑</span>
+                  </button>
+                ` : (savedQty > 0 ? `
+                  <div class="h-7 px-1.5 rounded-full bg-ink-950/90 border border-gold-400 flex items-center gap-1 shadow">
+                    <button onclick="quickAdjustCardQty('${item.id}', -1)" class="w-4 h-4 rounded-full bg-ink-800 text-gold-300 flex items-center justify-center text-[10px] font-bold">-</button>
+                    <span class="text-[10px] font-semibold text-gold-300 tabular-nums px-0.5">已选${savedQty}</span>
+                    <button onclick="quickAdjustCardQty('${item.id}', 1)" class="w-4 h-4 rounded-full bg-gold-500 text-ink-950 flex items-center justify-center text-[10px] font-bold">+</button>
+                  </div>
+                ` : `
+                  <button onclick="quickToggleWishlist('${item.id}')"
+                    class="h-7 px-2.5 rounded-full bg-ink-950/75 text-parchment-200 border border-gold-500/35 hover:border-gold-400 hover:text-gold-300 transition flex items-center gap-1 text-[11px]">
+                    <span class="text-gold-400">♡</span>
+                    <span>入席</span>
+                  </button>
+                `)}
+              </div>
+
+              <div class="absolute bottom-2 left-2.5 right-2.5 z-10 hidden sm:flex flex-wrap gap-1">
+                ${tags.map(tag => `
+                  <span class="px-1.5 py-0.5 rounded bg-ink-950/85 border border-gold-500/25 text-[9px] text-gold-300">${tag}</span>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2.5">
+              <div class="space-y-0.5">
+                <h3 class="${isCompactMobile ? 'text-xs sm:text-base' : 'text-sm sm:text-base'} font-medium text-parchment-100 group-hover:text-gold-300 transition leading-snug">
+                  ${title}
+                </h3>
+                <p class="text-[10px] font-en italic text-parchment-400 line-clamp-1">${subTitle}</p>
+                <p class="text-[11px] text-parchment-300/90 line-clamp-2 leading-relaxed font-light pt-0.5">
+                  ${oneLiner}
+                </p>
+              </div>
+
+              <div class="pt-2 border-t border-gold-500/15 space-y-1.5">
+                <div class="flex items-center gap-2 text-[10px] text-parchment-400">
+                  <span class="truncate">${isZh ? topMetric.labelZh : 'Flavor'}</span>
+                  <div class="flex-1 h-1 bg-ink-950 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-cinnabar-500 to-gold-400 rounded-full" style="width: ${topMetric.value}%"></div>
+                  </div>
+                  <span class="tabular-nums text-gold-400">${topMetric.value}%</span>
+                </div>
+
+                <div class="flex items-center justify-between pt-0.5">
+                  <div>
+                    <span class="text-[10px] text-gold-400">¥</span>
+                    <span class="${isCompactMobile ? 'text-sm sm:text-lg' : 'text-base sm:text-lg'} font-semibold text-gold-400 tabular-nums">${item.price}</span>
+                    <span class="text-[10px] text-parchment-400"> / ${unit}</span>
+                  </div>
+                  <span class="text-[11px] text-gold-400 group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-0.5">
+                    <span>${isZh ? '赏味详情' : 'Details'}</span>
+                    <span>→</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function quickToggleWishlist(itemId) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+      const existingIdx = state.wishlist.findIndex(w => w.itemId === itemId);
+      if (existingIdx > -1) {
+        state.wishlist[existingIdx].qty += 1;
+      } else {
+        state.wishlist.push({ itemId: item.id, qty: 1, prefId: 'standard', note: '' });
+      }
+      renderAll();
+      showToast(state.lang === 'zh' ? `已将「${item.nameZh}」加入心愿单` : `Added to Wishlist`);
+    }
+
+    function quickAdjustCardQty(itemId, delta) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+      const existingIdx = state.wishlist.findIndex(w => w.itemId === itemId);
+      if (existingIdx > -1) {
+        state.wishlist[existingIdx].qty += delta;
+        if (state.wishlist[existingIdx].qty <= 0) {
+          state.wishlist.splice(existingIdx, 1);
+        }
+        renderAll();
+      }
+    }
+
+    function toggleDockScrollExpand(forceState) {
+      state.dockExpanded = typeof forceState === 'boolean' ? forceState : !state.dockExpanded;
+      const panel = document.getElementById('dockExpandPanel');
+      const mobileArrow = document.getElementById('mobileExpandArrow');
+
+      if (state.dockExpanded) {
+        panel.classList.remove('hidden');
+        if (mobileArrow) mobileArrow.textContent = '▼';
+        renderDockCustomizationPanel();
+      } else {
+        panel.classList.add('hidden');
+        if (mobileArrow) mobileArrow.textContent = '▲';
+      }
+    }
+
+    function renderDockCustomizationPanel() {
+      const isZh = state.lang === 'zh';
+      document.getElementById('dockGuestsValue').textContent = isZh ? `${state.diners} 位` : `${state.diners} G`;
+      document.getElementById('dockGuestsSlider').value = state.diners;
+
+      const timeContainer = document.getElementById('dockTimePills');
+      if (timeContainer) {
+        timeContainer.innerHTML = TIME_SLOTS.map(slot => {
+          const active = state.timeSlot === slot.id;
+          return `
+            <button type="button" onclick="selectTimeSlot('${slot.id}')"
+              class="p-2 rounded-lg text-left border transition-all ${
+                active ? 'bg-gold-500/20 border-gold-400 text-gold-300' : 'bg-ink-950 border-gold-500/15 text-parchment-300'
+              }">
+              <div class="text-[11px] font-medium">${isZh ? slot.labelZh : slot.labelEn}</div>
+              <div class="text-[9px] text-parchment-400 tabular-nums">${slot.subZh}</div>
+            </button>
+          `;
+        }).join('');
+      }
+
+      const pavContainer = document.getElementById('dockPavilionCards');
+      if (pavContainer) {
+        pavContainer.innerHTML = PAVILIONS.map(p => {
+          const active = state.tableRoom === p.id;
+          return `
+            <div onclick="selectPavilion('${p.id}')"
+              class="p-2.5 rounded-lg border cursor-pointer transition-all flex items-center justify-between gap-2 ${
+                active ? 'bg-gold-500/20 border-gold-400 text-parchment-100' : 'bg-ink-950 border-gold-500/15 text-parchment-300'
+              }">
+              <div>
+                <div class="text-[11px] font-semibold text-gold-300">${isZh ? p.nameZh : p.nameEn}</div>
+                <div class="text-[10px] text-parchment-400">${isZh ? p.descZh : p.descEn}</div>
+              </div>
+              <span class="w-4 h-4 rounded-full border ${active ? 'border-gold-400 bg-gold-400 text-ink-950' : 'border-gold-500/40'} flex items-center justify-center text-[10px] font-bold shrink-0">
+                ${active ? '✓' : ''}
+              </span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      const roomSelect = document.getElementById('tableRoomSelect');
+      if (roomSelect) {
+        roomSelect.innerHTML = PAVILIONS.map(p => `<option value="${p.id}" ${state.tableRoom === p.id ? 'selected' : ''}>${isZh ? p.nameZh : p.nameEn}</option>`).join('');
+      }
+
+      const timeSelect = document.getElementById('timeSlotSelect');
+      if (timeSelect) {
+        timeSelect.innerHTML = TIME_SLOTS.map(t => `<option value="${t.id}" ${state.timeSlot === t.id ? 'selected' : ''}>${isZh ? t.labelZh : t.labelEn}</option>`).join('');
+      }
+    }
+
+    function selectPavilion(pavId) {
+      state.tableRoom = pavId;
+      renderAll();
+    }
+
+    function selectTimeSlot(slotId) {
+      state.timeSlot = slotId;
+      renderAll();
+    }
+
+    function setDinersValue(val) {
+      state.diners = Math.max(2, Math.min(12, parseInt(val, 10) || 4));
+      renderAll();
+    }
+
+    function updateBanquetNote(val) {
+      state.banquetNote = val.trim();
+    }
+
+    function openDetailModal(itemId) {
+      const item = MENU_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+
+      state.activeItem = item;
+      state.modalQty = 1;
+      state.selectedPrefId = 'standard';
+
+      const isZh = state.lang === 'zh';
+      const modal = document.getElementById('itemDetailModal');
+
+      document.getElementById('modalItemImg').src = item.image;
+      document.getElementById('modalItemBadge').textContent = isZh ? item.badgeZh : item.badgeEn;
+      document.getElementById('modalItemTitle').textContent = isZh ? item.nameZh : item.nameEn;
+      document.getElementById('modalItemEnTitle').textContent = isZh ? item.nameEn : item.nameZh;
+      document.getElementById('modalItemPrice').textContent = `¥${item.price}`;
+      document.getElementById('modalItemUnit').textContent = ` / ${isZh ? item.unitZh : item.unitEn}`;
+      document.getElementById('modalItemOneLiner').textContent = isZh ? item.oneLinerZh : item.oneLinerEn;
+
+      const tags = isZh ? item.tagsZh : item.tagsEn;
+      document.getElementById('modalItemTags').innerHTML = tags.map(t => `
+        <span class="px-2 py-0.5 rounded bg-ink-950 border border-gold-500/30 text-[10px] text-gold-300">${t}</span>
+      `).join('');
+
+      document.getElementById('modalPairingHint').textContent = isZh ? item.pairingZh : item.pairingEn;
+
+      const barsContainer = document.getElementById('modalSensoryBars');
+      barsContainer.innerHTML = item.metrics.map((m, i) => `
+        <div class="space-y-1">
+          <div class="flex justify-between text-[11px]">
+            <span class="text-parchment-200">${m.labelZh}</span>
+            <span class="text-gold-400 tabular-nums font-semibold">${m.value}%</span>
+          </div>
+          <div class="h-1.5 w-full bg-ink-900 rounded-full overflow-hidden border border-gold-500/20">
+            <div id="sensoryBarFill_${i}" class="h-full bg-gradient-to-r from-cinnabar-500 via-gold-500 to-gold-300 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+          </div>
+        </div>
+      `).join('');
+
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          item.metrics.forEach((m, i) => {
+            const barEl = document.getElementById(`sensoryBarFill_${i}`);
+            if (barEl) barEl.style.width = `${m.value}%`;
+          });
+        }, 60);
+      });
+
+      document.getElementById('modalOriginTag').textContent = isZh ? item.originZh : item.originEn;
+      document.getElementById('modalItemStory').textContent = isZh ? item.storyZh : item.storyEn;
+      document.getElementById('modalCustomNote').value = '';
+
+      renderModalPreferencePills();
+      updateModalConfirmButtonText();
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function renderModalPreferencePills() {
+      const isZh = state.lang === 'zh';
+      const container = document.getElementById('modalPreferencePills');
+      container.innerHTML = PREFERENCE_OPTIONS.map(opt => {
+        const active = state.selectedPrefId === opt.id;
+        return `
+          <button type="button" onclick="selectModalPreference('${opt.id}')"
+            class="px-2.5 py-1 rounded-lg text-xs transition-all ${
+              active ? 'bg-gold-500/25 border border-gold-400 text-gold-300 font-medium' : 'bg-ink-950 border border-gold-500/15 text-parchment-400'
+            }">
+            ${isZh ? opt.zh : opt.en}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectModalPreference(prefId) {
+      state.selectedPrefId = prefId;
+      renderModalPreferencePills();
+    }
+
+    function adjustModalQty(delta) {
+      state.modalQty = Math.max(1, state.modalQty + delta);
+      document.getElementById('modalQtyValue').textContent = state.modalQty;
+      updateModalConfirmButtonText();
+    }
+
+    function updateModalConfirmButtonText() {
+      if (!state.activeItem) return;
+      const total = state.activeItem.price * state.modalQty;
+      document.getElementById('modalConfirmAddText').textContent = state.lang === 'zh'
+        ? `加入心愿单 · ¥${total}`
+        : `Add to Memo · ¥${total}`;
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById('itemDetailModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function confirmAddToWishlist() {
+      if (!state.activeItem) return;
+      const note = document.getElementById('modalCustomNote').value.trim();
+      const existingIdx = state.wishlist.findIndex(
+        w => w.itemId === state.activeItem.id && w.prefId === state.selectedPrefId && w.note === note
+      );
+
+      if (existingIdx > -1) {
+        state.wishlist[existingIdx].qty += state.modalQty;
+      } else {
+        state.wishlist.push({ itemId: state.activeItem.id, qty: state.modalQty, prefId: state.selectedPrefId, note });
+      }
+
+      closeDetailModal();
+      renderAll();
+      showToast(state.lang === 'zh' ? `已将「${state.activeItem.nameZh}」加入心愿单` : `Saved to Wishlist`);
+    }
+
+    function calculateWishlistTotals() {
+      let totalCount = 0;
+      let totalPrice = 0;
+      state.wishlist.forEach(entry => {
+        const item = MENU_ITEMS.find(i => i.id === entry.itemId);
+        if (item) {
+          totalCount += entry.qty;
+          totalPrice += item.price * entry.qty;
+        }
+      });
+      return { totalCount, totalPrice };
+    }
+
+    function renderWishlistDock() {
+      const isZh = state.lang === 'zh';
+      const { totalCount, totalPrice } = calculateWishlistTotals();
+      const pavObj = PAVILIONS.find(p => p.id === state.tableRoom) || PAVILIONS[0];
+
+      document.getElementById('wishlistBadgeCount').textContent = totalCount;
+      document.getElementById('wishlistBarTotal').textContent = `¥${totalPrice.toLocaleString()}`;
+      document.getElementById('drawerTotalPrice').textContent = `¥${totalPrice.toLocaleString()}`;
+
+      document.getElementById('wishlistBarSub').textContent = `${pavObj.nameZh} · ${state.diners}位`;
+      document.getElementById('heroWishlistStatus').textContent = `${pavObj.nameZh} · ${state.diners}位 · 已选 ${totalCount} 道雅馔`;
+
+      const perPerson = state.diners > 0 ? Math.round(totalPrice / state.diners) : 0;
+      document.getElementById('perPersonEst').textContent = isZh ? `(约 ¥${perPerson}/位)` : `(~¥${perPerson}/g)`;
+    }
+
+    function renderWishlistDrawerContent() {
+      const isZh = state.lang === 'zh';
+      renderDockCustomizationPanel();
+
+      const container = document.getElementById('wishlistItemsContainer');
+      if (state.wishlist.length === 0) {
+        container.innerHTML = `
+          <div class="py-10 text-center text-xs text-parchment-400 border border-dashed border-gold-500/20 rounded-xl">
+            ${isZh ? '席单尚空，请加入点单备忘' : 'Wishlist is empty.'}
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = state.wishlist.map((entry, idx) => {
+        const item = MENU_ITEMS.find(i => i.id === entry.itemId);
+        if (!item) return '';
+        const prefObj = PREFERENCE_OPTIONS.find(p => p.id === entry.prefId) || PREFERENCE_OPTIONS[0];
+        const title = isZh ? item.nameZh : item.nameEn;
+        const unit = isZh ? item.unitZh : item.unitEn;
+
+        return `
+          <div class="p-3 rounded-xl bg-ink-950/90 border border-gold-500/20 flex items-start justify-between gap-2.5">
+            <img src="${item.image}" alt="${title}" class="w-12 h-12 rounded-lg object-cover shrink-0 border border-gold-500/20" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-baseline justify-between gap-2">
+                <h5 class="text-xs font-medium text-parchment-100 truncate">${title}</h5>
+                <span class="text-xs font-semibold text-gold-400 tabular-nums shrink-0">¥${item.price * entry.qty}</span>
+              </div>
+              <p class="text-[10px] text-parchment-400">${isZh ? prefObj.zh : prefObj.en}</p>
+              ${entry.note ? `<p class="text-[10px] text-gold-400">备注：${entry.note}</p>` : ''}
+              
+              <div class="flex items-center gap-2 mt-1.5">
+                <button onclick="updateWishlistQty(${idx}, -1)" class="w-5 h-5 rounded bg-ink-800 text-parchment-200 flex items-center justify-center text-xs">-</button>
+                <span class="text-xs tabular-nums px-1">${entry.qty} ${unit}</span>
+                <button onclick="updateWishlistQty(${idx}, 1)" class="w-5 h-5 rounded bg-ink-800 text-parchment-200 flex items-center justify-center text-xs">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateWishlistQty(idx, delta) {
+      if (!state.wishlist[idx]) return;
+      state.wishlist[idx].qty += delta;
+      if (state.wishlist[idx].qty <= 0) {
+        state.wishlist.splice(idx, 1);
+      }
+      renderAll();
+      renderWishlistDrawerContent();
+    }
+
+    function clearWishlist() {
+      state.wishlist = [];
+      renderAll();
+      renderWishlistDrawerContent();
+    }
+
+    function openWishlistDrawer() {
+      renderWishlistDrawerContent();
+      const drawer = document.getElementById('wishlistDrawerModal');
+      drawer.classList.remove('hidden');
+      drawer.classList.add('flex');
+    }
+
+    function closeWishlistDrawer() {
+      const drawer = document.getElementById('wishlistDrawerModal');
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+    }
+
+    // ==========================================
+    // 洒金笺席单卡片与完美图片导出 (FIXED PADDING & LAYOUT)
+    // ==========================================
+    function openBanquetScrollModal() {
+      if (state.wishlist.length === 0) {
+        showToast(state.lang === 'zh' ? '请先加入至少一道雅馔或茗茶' : 'Please add items first');
+        return;
+      }
+
+      const isZh = state.lang === 'zh';
+      const { totalCount, totalPrice } = calculateWishlistTotals();
+      const pavObj = PAVILIONS.find(p => p.id === state.tableRoom) || PAVILIONS[0];
+      const slotObj = TIME_SLOTS.find(t => t.id === state.timeSlot) || TIME_SLOTS[2];
+
+      document.getElementById('waiterCardTitle').textContent = isZh ? '云起·东方雅集席单' : 'YUNQI BANQUET SCROLL';
+      document.getElementById('cardRoomValue').textContent = isZh ? pavObj.nameZh : pavObj.nameEn;
+      document.getElementById('cardTimeValue').textContent = isZh ? slotObj.labelZh : slotObj.labelEn;
+      document.getElementById('cardGuestsValue').textContent = isZh ? `${state.diners} 位` : `${state.diners} G`;
+
+      const remarksBox = document.getElementById('cardRemarksBox');
+      if (state.banquetNote) {
+        remarksBox.classList.remove('hidden');
+        document.getElementById('cardRemarksText').textContent = state.banquetNote;
+      } else {
+        remarksBox.classList.add('hidden');
+      }
+
+      const now = new Date();
+      document.getElementById('cardDateStamp').textContent = `CURATED ${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+
+      const fontSizeClass = state.largePrintWaiterMode ? 'text-base sm:text-lg' : 'text-xs sm:text-sm';
+
+      document.getElementById('waiterCardItems').innerHTML = state.wishlist.map((entry, i) => {
+        const item = MENU_ITEMS.find(it => it.id === entry.itemId);
+        if (!item) return '';
+        const prefObj = PREFERENCE_OPTIONS.find(p => p.id === entry.prefId) || PREFERENCE_OPTIONS[0];
+        return `
+          <div class="py-2 flex items-start justify-between gap-2">
+            <div class="space-y-0.5 min-w-0">
+              <div class="${fontSizeClass} font-bold text-[#1A1612] truncate">
+                ${i + 1}. ${item.nameZh}
+              </div>
+              <div class="inline-flex flex-wrap items-center gap-1">
+                <span class="px-1.5 py-0.5 rounded bg-[#EAE2D3] border border-[#8C6D3F]/40 text-[9px] text-[#5C4D3C]">${prefObj.zh}</span>
+                ${entry.note ? `<span class="px-1.5 py-0.5 rounded bg-[#9B2C20]/15 text-[9px] text-[#9B2C20]">注：${entry.note}</span>` : ''}
+              </div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="${fontSizeClass} font-bold text-[#9B2C20] tabular-nums">×${entry.qty} ${item.unitZh}</div>
+              <div class="text-[11px] text-[#5C4D3C] tabular-nums">¥${item.price * entry.qty}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('waiterCardTotal').textContent = `¥${totalPrice.toLocaleString()}`;
+
+      const modal = document.getElementById('waiterCardModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    async function saveBanquetScrollAsImage() {
+      const surfaceEl = document.getElementById('sajinPaperSurface');
+      const btnTextEl = document.getElementById('saveScrollImgBtnText');
+      if (!surfaceEl) return;
+
+      const isZh = state.lang === 'zh';
+      const originalText = btnTextEl ? btnTextEl.textContent : '保存图片';
+
+      try {
+        if (btnTextEl) btnTextEl.textContent = isZh ? '生成中...' : 'Saving...';
+
+        if (typeof html2canvas === 'undefined') {
+          showToast('渲染库加载中，请稍后再试');
+          return;
+        }
+
+        const canvas = await html2canvas(surfaceEl, {
+          scale: 2.5,
+          useCORS: true,
+          backgroundColor: '#F4EFE6',
+          logging: false,
+          windowWidth: surfaceEl.scrollWidth + 40
+        });
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        const dateStr = new Date().toISOString().slice(0, 10);
+        link.download = `云起雅集席单_${state.tableRoom}_${dateStr}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast(isZh ? '席单图片已成功保存至手机/电脑！' : 'Banquet card image saved!');
+      } catch (err) {
+        console.error('Export image error:', err);
+        showToast(isZh ? '导出图片失败，请直接截图保存' : 'Could not export image');
+      } finally {
+        if (btnTextEl) btnTextEl.textContent = originalText;
+      }
+    }
+
+    function toggleWaiterLargePrint() {
+      state.largePrintWaiterMode = !state.largePrintWaiterMode;
+      document.getElementById('largePrintToggleText').textContent = state.largePrintWaiterMode ? '标准字号' : '大字模式';
+      openBanquetScrollModal();
+    }
+
+    function closeWaiterCardModal() {
+      const modal = document.getElementById('waiterCardModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyWishlistSummary() {
+      if (state.wishlist.length === 0) return;
+      const { totalCount, totalPrice } = calculateWishlistTotals();
+      const perPerson = state.diners > 0 ? Math.round(totalPrice / state.diners) : 0;
+
+      const lines = [
+        `📜【云起·闽宴茶事 | 东方雅集席单】`,
+        `━━━━━━━━━━━━━━`,
+        `▸ 私享茶寮：${state.tableRoom}`,
+        `▸ 雅集时辰：${state.timeSlot}`,
+        `▸ 入席人数：${state.diners} 位`,
+        `━━━━━━━━━━━━━━`,
+        `【入席珍馐与岩茶（共 ${totalCount} 份）】`
+      ];
+
+      state.wishlist.forEach((entry, idx) => {
+        const item = MENU_ITEMS.find(i => i.id === entry.itemId);
+        const prefObj = PREFERENCE_OPTIONS.find(p => p.id === entry.prefId) || PREFERENCE_OPTIONS[0];
+        if (item) {
+          lines.push(`${idx + 1}. ${item.nameZh} ×${entry.qty}${item.unitZh} (¥${item.price * entry.qty})`);
+          lines.push(`   ↳ 偏好：${prefObj.zh}${entry.note ? ' | ' + entry.note : ''}`);
+        }
+      });
+
+      if (state.banquetNote) {
+        lines.push(`━━━━━━━━━━━━━━`);
+        lines.push(`▸ 席间雅嘱：${state.banquetNote}`);
+      }
+
+      lines.push(`━━━━━━━━━━━━━━`);
+      lines.push(`▸ 预估合计：¥${totalPrice.toLocaleString()} (约 ¥${perPerson}/位)`);
+
+      copyTextToClipboard(lines.join('\n'), isZh => '已复制预订文字，可直接发给管家');
+    }
+
+    function copyTextToClipboard(text, successMsg) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast('已复制预订文字');
+      } catch (e) {
+        showToast('复制成功');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function toggleCuratorMode() {
+      state.curatorMode = !state.curatorMode;
+      const banner = document.getElementById('curatorBanner');
+      const btn = document.getElementById('curatorModeBtn');
+      const dot = document.getElementById('curatorStatusDot');
+
+      if (state.curatorMode) {
+        banner.classList.remove('hidden');
+        btn.classList.add('border-gold-400', 'bg-gold-500/20', 'text-gold-300');
+        dot.classList.remove('bg-parchment-400');
+        dot.classList.add('bg-cinnabar-500', 'animate-ping');
+        showToast('主理人模式已开：点击任意卡片修改图文');
+      } else {
+        banner.classList.add('hidden');
+        btn.classList.remove('border-gold-400', 'bg-gold-500/20', 'text-gold-300');
+        dot.classList.add('bg-parchment-400');
+        dot.classList.remove('bg-cinnabar-500', 'animate-ping');
+        showToast('已退出主理人模式');
+      }
+      renderAll();
+    }
+
+    function openCuratorEditor(itemId) {
+      const modal = document.getElementById('curatorEditorModal');
+      const deleteBtn = document.getElementById('deleteItemBtn');
+      const item = itemId ? MENU_ITEMS.find(i => i.id === itemId) : null;
+
+      if (item) {
+        document.getElementById('curatorModalTitle').textContent = `编辑单品：${item.nameZh}`;
+        document.getElementById('editItemId').value = item.id;
+        document.getElementById('editNameZh').value = item.nameZh || '';
+        document.getElementById('editNameEn').value = item.nameEn || '';
+        document.getElementById('editCategory').value = item.category || 'minhai';
+        document.getElementById('editPrice').value = item.price || 128;
+        document.getElementById('editUnitZh').value = item.unitZh || '例';
+        document.getElementById('editBadgeZh').value = item.badgeZh || '推荐';
+        document.getElementById('editTagsZh').value = (item.tagsZh || []).join(', ');
+        document.getElementById('editOriginZh').value = item.originZh || '';
+        document.getElementById('editOneLinerZh').value = item.oneLinerZh || '';
+        document.getElementById('editStoryZh').value = item.storyZh || '';
+        document.getElementById('editImage').value = item.image || '';
+        document.getElementById('editImgPreview').src = item.image || '';
+        deleteBtn.classList.remove('hidden');
+      } else {
+        document.getElementById('curatorModalTitle').textContent = '新增时令新菜';
+        document.getElementById('editItemId').value = '';
+        document.getElementById('editNameZh').value = '';
+        document.getElementById('editNameEn').value = 'Seasonal Delicacy';
+        document.getElementById('editCategory').value = state.activeCategory === 'all' ? 'minhai' : state.activeCategory;
+        document.getElementById('editPrice').value = 158;
+        document.getElementById('editUnitZh').value = '例';
+        document.getElementById('editBadgeZh').value = '时令新菜';
+        document.getElementById('editTagsZh').value = '时令鲜物, 匠心备制';
+        document.getElementById('editOriginZh').value = '山海时令 · 当日鲜备';
+        document.getElementById('editOneLinerZh').value = '';
+        document.getElementById('editStoryZh').value = '';
+        const fallbackImg = 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80';
+        document.getElementById('editImage').value = fallbackImg;
+        document.getElementById('editImgPreview').src = fallbackImg;
+        deleteBtn.classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeCuratorEditor() {
+      document.getElementById('curatorEditorModal').classList.add('hidden');
+      document.getElementById('curatorEditorModal').classList.remove('flex');
+    }
+
+    function handleLocalImageUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxDim = 800;
+          let w = img.width;
+          let h = img.height;
+          if (w > h && w > maxDim) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else if (h > maxDim) {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          document.getElementById('editImage').value = dataUrl;
+          document.getElementById('editImgPreview').src = dataUrl;
+          showToast('照片已载入，点击保存即可生效');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveCuratorItem(event) {
+      event.preventDefault();
+      const existingId = document.getElementById('editItemId').value;
+      const nameZh = document.getElementById('editNameZh').value.trim();
+      const nameEn = document.getElementById('editNameEn').value.trim() || nameZh;
+      const category = document.getElementById('editCategory').value;
+      const price = parseInt(document.getElementById('editPrice').value, 10) || 128;
+      const unitZh = document.getElementById('editUnitZh').value.trim() || '例';
+      const badgeZh = document.getElementById('editBadgeZh').value.trim() || '雅集推荐';
+      const tagsRaw = document.getElementById('editTagsZh').value;
+      const tagsZh = tagsRaw.split(/[,，]/).map(s => s.trim()).filter(Boolean);
+      const originZh = document.getElementById('editOriginZh').value.trim() || '私宴精选';
+      const oneLinerZh = document.getElementById('editOneLinerZh').value.trim();
+      const storyZh = document.getElementById('editStoryZh').value.trim() || oneLinerZh;
+      const image = document.getElementById('editImage').value.trim() || 'https://placehold.co/800x600/1A1815/C8A265?text=Dish';
+
+      const itemObj = {
+        id: existingId || ('dish-custom-' + Date.now()),
+        category,
+        nameZh,
+        nameEn,
+        price,
+        unitZh,
+        unitEn: unitZh,
+        badgeZh,
+        badgeEn: badgeZh,
+        originZh,
+        originEn: originZh,
+        pairingZh: '宜佐：武夷正岩肉桂',
+        pairingEn: 'Pairs with Rock Tea',
+        tagsZh: tagsZh.length ? tagsZh : ['时令雅馔'],
+        tagsEn: tagsZh.length ? tagsZh : ['Seasonal'],
+        oneLinerZh,
+        oneLinerEn: oneLinerZh,
+        storyZh,
+        storyEn: storyZh,
+        image,
+        metrics: [
+          { labelZh: '风味醇厚度', value: 92 },
+          { labelZh: '香气馥郁度', value: 90 },
+          { labelZh: '口感层次感', value: 90 },
+          { labelZh: '回甘悠长度', value: 88 }
+        ]
+      };
+
+      if (existingId) {
+        const idx = MENU_ITEMS.findIndex(i => i.id === existingId);
+        if (idx > -1) MENU_ITEMS[idx] = itemObj;
+      } else {
+        MENU_ITEMS.unshift(itemObj);
+      }
+
+      saveMenuToStorage();
+      closeCuratorEditor();
+      renderAll();
+      showToast(`已保存「${nameZh}」`);
+    }
+
+    function deleteCurrentCuratorItem() {
+      const existingId = document.getElementById('editItemId').value;
+      if (!existingId) return;
+      const idx = MENU_ITEMS.findIndex(i => i.id === existingId);
+      if (idx > -1) {
+        MENU_ITEMS.splice(idx, 1);
+        state.wishlist = state.wishlist.filter(w => w.itemId !== existingId);
+        saveMenuToStorage();
+        closeCuratorEditor();
+        renderAll();
+        showToast('已删除单品');
+      }
+    }
+
+    function exportMenuDataBackup() {
+      copyTextToClipboard(JSON.stringify(MENU_ITEMS, null, 2), '已导出菜单JSON数据');
+    }
+
+    function openResetConfirmModal() {
+      document.getElementById('resetConfirmModal').classList.remove('hidden');
+      document.getElementById('resetConfirmModal').classList.add('flex');
+    }
+
+    function closeResetConfirmModal() {
+      document.getElementById('resetConfirmModal').classList.add('hidden');
+      document.getElementById('resetConfirmModal').classList.remove('flex');
+    }
+
+    function confirmResetMenuData() {
+      localStorage.removeItem(STORAGE_KEY_MENU);
+      MENU_ITEMS = JSON.parse(JSON.stringify(DEFAULT_MENU_ITEMS));
+      closeResetConfirmModal();
+      renderAll();
+      showToast('已恢复默认菜单');
+    }
+
+    function initAmbientMistCanvas() {
+      const canvas = document.getElementById('ambientCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const particles = Array.from({ length: 22 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.5 + 0.4,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: -Math.random() * 0.2 - 0.05,
+        alpha: Math.random() * 0.35 + 0.1
+      }));
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y < -10) { p.y = height + 10; p.x = Math.random() * width; }
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200, 162, 101, ${p.alpha})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      document.getElementById('toastMessage').textContent = msg;
+      box.classList.remove('opacity-0', '-translate-y-2');
+      box.classList.add('opacity-100', 'translate-y-0');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.add('opacity-0', '-translate-y-2');
+        box.classList.remove('opacity-100', 'translate-y-0');
+      }, 2200);
+    }
+  </script>
+</body>
+</html>
